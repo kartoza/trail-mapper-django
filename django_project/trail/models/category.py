@@ -69,7 +69,10 @@ class Category(models.Model):
     )
 
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        null = True,
+        blank = True
+    )
     objects = models.Manager()
 
 

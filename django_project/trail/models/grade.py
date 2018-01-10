@@ -2,6 +2,7 @@
 """Model definitions for a trail app"""
 
 import os
+import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -51,6 +52,13 @@ class Grade(models.Model):
         help_text = _('Enter Grade name of the Trail.')
     )
 
+    # guid = models.UUIDField(
+    #     _('GUID'),
+    #     db_index=False,
+    #     default=uuid_lib.uuid4,
+    #     editable=False
+    # )
+
     image = models.ImageField(
         _('Image file'),
         null=True,
@@ -62,7 +70,17 @@ class Grade(models.Model):
             '"Choose File" button above.')
     )
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        null=True,
+        blank=True
+    )
+
+    guid = models.UUIDField(
+        _('GUID'),
+        primary_key=False,
+        default=uuid_lib.uuid4,
+        editable=False)
+
     objects = models.Manager()
 
     class Meta:

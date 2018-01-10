@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -11,9 +12,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RemoveField(
             model_name='trail',
-            name='offset',
-            field=models.CharField(help_text='Enter offset value i.e -2', max_length=255, null=True, verbose_name='Offset', blank=True),
+            name='guid',
+        ),
+        migrations.AddField(
+            model_name='grade',
+            name='guid',
+            field=models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False),
         ),
     ]

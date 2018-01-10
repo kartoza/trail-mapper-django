@@ -25,7 +25,11 @@ class TrailSections(models.Model):
         help_text = _('Enter ordering of trail sections.')
     )
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        null=True,
+        blank=True
+    )
+
     objects = models.Manager()
     trail = models.ForeignKey(Trail)
     trail_section = models.ForeignKey(TrailSection)

@@ -2,6 +2,7 @@
 """Model definitions for a trail app"""
 
 import os
+import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -52,6 +53,13 @@ class TrailSection(models.Model):
         help_text = _('Enter name of the Trail.')
     )
 
+    guid = models.UUIDField(
+        _('GUID'),
+        db_index=False,
+        default=uuid_lib.uuid4,
+        editable=False
+    )
+
     notes = models.TextField(
         _("Notes on named Trail"),
         max_length = 300,
@@ -79,7 +87,10 @@ class TrailSection(models.Model):
     )
 
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        null=True,
+        blank=True
+    )
     objects = models.Manager()
     grade_id = models.ForeignKey(Grade)
 

@@ -2,6 +2,7 @@
 """Model definitions for a trail app"""
 
 import os
+import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -53,6 +54,13 @@ class POI(models.Model):
         help_text = _('Enter name of the Point of Interest.')
     )
 
+    guid = models.UUIDField(
+        _('GUID'),
+        db_index = False,
+        default = uuid_lib.uuid4,
+        editable = False
+    )
+
     notes = models.TextField(
         _("Notes on named POI"),
         max_length = 300,
@@ -72,15 +80,18 @@ class POI(models.Model):
             '"Choose File" button above.')
     )
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        null=True,
+        blank=True
+    )
     objects = models.Manager()
     category = models.ForeignKey(Category)
-    trail_section = models.ForeignKey(TrailSection, blank=True)
+    trail_section = models.ForeignKey(TrailSection)
 
     class Meta:
         ordering = ['name']
         app_label = 'trail'
-        verbose_name_plural = 'Point of Interest (POI)'
+        verbose_name_plural = 'Points of Interest (POIs)'
 
 
         def _str__(self):

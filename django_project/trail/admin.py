@@ -11,7 +11,7 @@ from trail.models.point_of_interest import POI
 class TrailAdmin(admin.ModelAdmin):
     """Trail admin model."""
 
-    list_display = ['name', 'colour', 'offset']
+    list_display = ['name', 'guid', 'offset']
     search_fields = ('name', 'colour', 'offset',)
     list_filter = ('name', 'colour', 'offset',)
     list_per_page = 10
