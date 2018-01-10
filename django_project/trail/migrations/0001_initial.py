@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import uuid
 import django.contrib.gis.db.models.fields
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -33,6 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(help_text='Enter Grade name of the Trail.', max_length=255, verbose_name='Grade Name')),
                 ('image', models.ImageField(help_text='An image of the trail grade. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_grade', null=True, verbose_name='Image file', blank=True)),
                 ('slug', models.SlugField(null=True, blank=True)),
+                ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
             ],
             options={
                 'ordering': ['name'],
@@ -44,6 +45,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(help_text='Enter name of the Point of Interest.', max_length=255, null=True, verbose_name='Name of Point of Interest(POI)', blank=True)),
+                ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named POI', max_length=300, null=True, verbose_name='Notes on named POI', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/poi', null=True, verbose_name='Image file', blank=True)),
                 ('slug', models.SlugField(null=True, blank=True)),
@@ -51,7 +53,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['name'],
-                'verbose_name_plural': 'Point of Interest (POI)',
+                'verbose_name_plural': 'Points of Interest (POIs)',
             },
         ),
         migrations.CreateModel(
@@ -77,6 +79,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(help_text='Enter name of the Trail.', max_length=255, verbose_name='Name of trail section')),
+                ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named trail', max_length=300, null=True, verbose_name='Notes on named Trail', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_sections', null=True, verbose_name='Image file', blank=True)),
                 ('geometry', django.contrib.gis.db.models.fields.LineStringField(help_text='Enter the geometry of the trail section (as line string).', srid=4326, null=True, verbose_name='Geometry', blank=True)),
@@ -111,7 +114,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='poi',
             name='trail_section',
-            field=models.ForeignKey(to='trail.TrailSection', blank=True),
+            field=models.ForeignKey(to='trail.TrailSection'),
         ),
         migrations.AlterUniqueTogether(
             name='trailsection',

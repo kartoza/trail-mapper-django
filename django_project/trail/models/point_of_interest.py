@@ -22,43 +22,20 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-def increment_slug(_name):
-    """Function to increment slug.
-
-    If there already exists the trail name and colour,
-    the slug will be incremented
-    e.g. trail-#25HHfff, trail-#25HHfff etc.
-    """
-
-    existing_pois = POI.objects.all()
-    new_poi_name = '%s' % (_name)
-    for poi in existing_pois:
-        if _name == poi.name:
-            _count_names = POI.objects.filter(
-                name=_name)
-            count = _count_names.count() + 1
-            new_poi_name = '%s %s' % (_name, count)
-            break
-
-    return new_poi_name
-
-
 class POI(models.Model):
     "Model definition for a Point of Interest (POI)."
-
-    name = models.CharField(
-        _('Name of Point of Interest(POI)'),
-        max_length = 255,
-        null = True,
-        blank = True,
-        help_text = _('Enter name of the Point of Interest.')
-    )
 
     guid = models.UUIDField(
         _('GUID'),
         db_index = False,
         default = uuid_lib.uuid4,
         editable = False
+    )
+
+    name = models.CharField(
+        _('Name of Point of Interest(POI)'),
+        max_length = 255,
+        help_text = _('Enter name of the Point of Interest.')
     )
 
     notes = models.TextField(
@@ -99,14 +76,3 @@ class POI(models.Model):
 
         def __unicode__(self):
             return '%s' % (self.name)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            name = increment_slug(self.name)
-            words = name.split()
-            filtered_words = [word for word in
-                              words if word.lower() not in STOP_WORDS]
-            # unidecode() represents special characters (unicode data) in ASCII
-            new_list = unidecode(' '.join(filtered_words))
-            self.slug = slugify(new_list)[:50]
-        super(POI, self).save(*args, **kwargs)

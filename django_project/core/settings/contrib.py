@@ -13,6 +13,7 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',  # enable Raven plugin
     'widget_tweaks',  # lets us add some bootstrap css to form elements
     'easy_thumbnails',
+    'rest_framework', # used in designing the API
 )
 
 # Set disqus and shortname
@@ -101,4 +102,12 @@ SOCIALACCOUNT_PROVIDERS = {
     'github': {
         'SCOPE': ['user:email', 'public_repo', 'read:org']
     }
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

@@ -20,36 +20,12 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-def increment_slug(_name):
-    """Function to increment slug.
-
-    If there already exists the trail name and colour,
-    the slug will be incremented
-    e.g. trail-#25HHfff, trail-#25HHfff etc.
-    """
-
-    existing_trails = Trail.objects.all()
-    new_trail_name = '%s' % (_name)
-    for trail in existing_trails:
-        if _name == trail.name:
-            _count_names = Trail.objects.filter(
-                name=_name)
-            _count = _count_names.count() + 1
-            new_trail_name = '%s %s' % (_name, _count)
-            break
-
-    return new_trail_name
-
-
-# class Trail(GUIDModel, models.Model):
 class Trail(models.Model):
     "Model definition of a Trail."
 
     name = models.CharField(
         _('Name of Trail'),
         max_length = 255,
-        null = False,
-        blank = False,
         help_text = _('Enter name of the Trail.')
     )
 
@@ -114,14 +90,3 @@ class Trail(models.Model):
 
         def __unicode__(self):
             return '%s' % (self.name)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            name = increment_slug(self.name)
-            words = name.split()
-            filtered_words = [word for word in
-                              words if word.lower() not in STOP_WORDS]
-            # unidecode() represents special characters (unicode data) in ASCII
-            new_list = unidecode(' '.join(filtered_words))
-            self.slug = slugify(new_list)[:50]
-        super(Trail, self).save(*args, **kwargs)

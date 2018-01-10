@@ -2,6 +2,7 @@
 """Model definitions for a trail app"""
 
 import os
+import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -18,29 +19,14 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-def increment_slug(_name):
-    """Function to increment slug.
-
-    If there already exists the trail name and colour,
-    the slug will be incremented
-    e.g. trail-#25HHfff, trail-#25HHfff etc.
-    """
-
-    existing_categories = Category.objects.all()
-    new_category_name = '%s' % (_name)
-    for category in existing_categories:
-        if _name == category.name:
-            _count_names = Category.objects.filter(
-                name=_name)
-            count = _count_names.count() + 1
-            new_category_name = '%s %s' % (_name, count)
-            break
-
-    return new_category_name
-
-
 class Category(models.Model):
     "Model definition of a Trail Section."
+
+    guid = models.UUIDField(
+        _('GUID'),
+        primary_key=False,
+        default=uuid_lib.uuid4,
+        editable=False)
 
     name = models.CharField(
         _('Name of Category'),
@@ -87,14 +73,3 @@ class Category(models.Model):
 
         def __unicode__(self):
             return '%s' % (self.name)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            name = increment_slug(self.name)
-            words = name.split()
-            filtered_words = [word for word in
-                              words if word.lower() not in STOP_WORDS]
-            # unidecode() represents special characters (unicode data) in ASCII
-            new_list = unidecode(' '.join(filtered_words))
-            self.slug = slugify(new_list)[:50]
-        super(Category, self).save(*args, **kwargs)

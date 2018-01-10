@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import uuid
 
 
 class Migration(migrations.Migration):
@@ -13,12 +12,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name='trail',
-            name='guid',
-        ),
-        migrations.AddField(
             model_name='grade',
             name='guid',
-            field=models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False),
+        ),
+        migrations.RemoveField(
+            model_name='poi',
+            name='guid',
+        ),
+        migrations.RemoveField(
+            model_name='trailsection',
+            name='guid',
         ),
     ]

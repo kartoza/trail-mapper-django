@@ -20,44 +20,20 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-def increment_slug(_name):
-    """Function to increment slug.
-
-    If there already exists the trail name and colour,
-    the slug will be incremented
-    e.g. trail-#25HHfff, trail-#25HHfff etc.
-    """
-
-    existing_grades = Grade.objects.all()
-    new_grade_name = '%s' % (_name)
-    for grade in existing_grades:
-        if _name == grade.name:
-            _count_names = Grade.objects.filter(
-                name=_name)
-            count = _count_names.count() + 1
-            new_grade_name = '%s %s' % (_name, count)
-            break
-
-    return new_grade_name
-
-
 class Grade(models.Model):
     "Model definition of a Trail."
+
+    guid = models.UUIDField(
+        _('GUID'),
+        primary_key=False,
+        default=uuid_lib.uuid4,
+        editable=False)
 
     name = models.CharField(
         _('Grade Name'),
         max_length = 255,
-        null=False,
-        blank=False,
         help_text = _('Enter Grade name of the Trail.')
     )
-
-    # guid = models.UUIDField(
-    #     _('GUID'),
-    #     db_index=False,
-    #     default=uuid_lib.uuid4,
-    #     editable=False
-    # )
 
     image = models.ImageField(
         _('Image file'),
@@ -75,12 +51,6 @@ class Grade(models.Model):
         blank=True
     )
 
-    guid = models.UUIDField(
-        _('GUID'),
-        primary_key=False,
-        default=uuid_lib.uuid4,
-        editable=False)
-
     objects = models.Manager()
 
     class Meta:
@@ -94,14 +64,3 @@ class Grade(models.Model):
 
         def __unicode__(self):
             return '%s' % (self.name)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            name = increment_slug(self.name)
-            words = name.split()
-            filtered_words = [word for word in
-                              words if word.lower() not in STOP_WORDS]
-            # unidecode() represents special characters (unicode data) in ASCII
-            new_list = unidecode(' '.join(filtered_words))
-            self.slug = slugify(new_list)[:50]
-        super(Grade, self).save(*args, **kwargs)
