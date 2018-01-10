@@ -11,10 +11,12 @@ from django.conf.global_settings import MEDIA_ROOT
 from unidecode import unidecode
 
 from core.settings.contrib import STOP_WORDS
-# from ..utils import GUIDModel
+from category import Category
+from trail_section import TrailSection
+
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
-__date__ = '01/09/2018'
+__date__ = '01/10/2018'
 __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
@@ -27,78 +29,58 @@ def increment_slug(_name):
     e.g. trail-#25HHfff, trail-#25HHfff etc.
     """
 
-    existing_trails = Trail.objects.all()
-    new_trail_name = '%s' % (_name)
-    for trail in existing_trails:
-        if _name == trail.name:
-            _count_names = Trail.objects.filter(
+    existing_pois = POI.objects.all()
+    new_poi_name = '%s' % (_name)
+    for poi in existing_pois:
+        if _name == poi.name:
+            _count_names = POI.objects.filter(
                 name=_name)
-            _count = _count_names.count() + 1
-            new_trail_name = '%s %s' % (_name, _count)
+            count = _count_names.count() + 1
+            new_poi_name = '%s %s' % (_name, count)
             break
 
-    return new_trail_name
+    return new_poi_name
 
 
-# class Trail(GUIDModel, models.Model):
-class Trail(models.Model):
-    "Model definition of a Trail."
+class POI(models.Model):
+    "Model definition for a Point of Interest (POI)."
 
     name = models.CharField(
-        _('Name of Trail'),
+        _('Name of Point of Interest(POI)'),
         max_length = 255,
-        null = False,
-        blank = False,
-        help_text = _('Enter name of the Trail.')
+        null = True,
+        blank = True,
+        help_text = _('Enter name of the Point of Interest.')
     )
 
     notes = models.TextField(
-        _("Notes on named Trail"),
+        _("Notes on named POI"),
         max_length = 300,
         null = True,
         blank = True,
-        help_text = _('Enter some notes regarding the above named trail')
-    )
-
-    offset = models.CharField(
-        _("Offset"),
-        max_length=255,
-        null = True,
-        blank = True,
-        help_text = _('Enter offset value i.e -2')
-    )
-
-    colour = models.CharField(
-        _("Colour"),
-        max_length = 255,
-        null=True,
-        blank = True,
-        help_text = _('Enter colour of the trail.')
+        help_text = _('Enter some notes regarding the above named POI')
     )
 
     image = models.ImageField(
         _('Image file'),
         null=True,
         blank=True,
-        upload_to=os.path.join(MEDIA_ROOT, 'images/trail'),
+        upload_to=os.path.join(MEDIA_ROOT, 'images/poi'),
         help_text = _(
-            'An image of the trail. '
+            'An image of the trail section. '
             'Most browsers support dragging the image directly on to the '
             '"Choose File" button above.')
     )
 
-    geometry = models.PointField()
-
     slug = models.SlugField()
     objects = models.Manager()
+    category = models.ForeignKey(Category)
+    trail_section = models.ForeignKey(TrailSection, blank=True)
 
     class Meta:
         ordering = ['name']
-        unique_together = [
-            'name', 'offset',
-        ]
-        # app_label = 'trail'
-        verbose_name_plural = "Trails"
+        app_label = 'trail'
+        verbose_name_plural = 'Point of Interest (POI)'
 
 
         def _str__(self):
@@ -116,4 +98,4 @@ class Trail(models.Model):
             # unidecode() represents special characters (unicode data) in ASCII
             new_list = unidecode(' '.join(filtered_words))
             self.slug = slugify(new_list)[:50]
-        super(Trail, self).save(*args, **kwargs)
+        super(POI, self).save(*args, **kwargs)

@@ -11,10 +11,11 @@ from django.conf.global_settings import MEDIA_ROOT
 from unidecode import unidecode
 
 from core.settings.contrib import STOP_WORDS
-# from ..utils import GUIDModel
+from grade import Grade
+
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
-__date__ = '01/09/2018'
+__date__ = '01/10/2018'
 __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
@@ -27,28 +28,27 @@ def increment_slug(_name):
     e.g. trail-#25HHfff, trail-#25HHfff etc.
     """
 
-    existing_trails = Trail.objects.all()
-    new_trail_name = '%s' % (_name)
-    for trail in existing_trails:
-        if _name == trail.name:
-            _count_names = Trail.objects.filter(
+    existing_trail_section = TrailSection.objects.all()
+    new_trail_section_name = '%s' % (_name)
+    for trail_section in existing_trail_section:
+        if _name == trail_section.name:
+            _count_names = TrailSection.objects.filter(
                 name=_name)
-            _count = _count_names.count() + 1
-            new_trail_name = '%s %s' % (_name, _count)
+            count = _count_names.count() + 1
+            new_trail_section_name = '%s %s' % (_name, count)
             break
 
-    return new_trail_name
+    return new_trail_section_name
 
 
-# class Trail(GUIDModel, models.Model):
-class Trail(models.Model):
-    "Model definition of a Trail."
+class TrailSection(models.Model):
+    "Model definition of a Trail Section."
 
     name = models.CharField(
-        _('Name of Trail'),
+        _('Name of trail section'),
         max_length = 255,
-        null = False,
-        blank = False,
+        null=False,
+        blank=False,
         help_text = _('Enter name of the Trail.')
     )
 
@@ -60,45 +60,52 @@ class Trail(models.Model):
         help_text = _('Enter some notes regarding the above named trail')
     )
 
-    offset = models.CharField(
-        _("Offset"),
-        max_length=255,
-        null = True,
-        blank = True,
-        help_text = _('Enter offset value i.e -2')
-    )
-
-    colour = models.CharField(
-        _("Colour"),
-        max_length = 255,
-        null=True,
-        blank = True,
-        help_text = _('Enter colour of the trail.')
-    )
-
     image = models.ImageField(
         _('Image file'),
         null=True,
         blank=True,
-        upload_to=os.path.join(MEDIA_ROOT, 'images/trail'),
+        upload_to=os.path.join(MEDIA_ROOT, 'images/trail_sections'),
         help_text = _(
-            'An image of the trail. '
+            'An image of the trail section. '
             'Most browsers support dragging the image directly on to the '
             '"Choose File" button above.')
     )
 
-    geometry = models.PointField()
+    geometry = models.LineStringField(
+        _('Geometry'),
+        null=True,
+        blank=True,
+        help_text = _('Enter the geometry of the trail section (as line string).')
+    )
+
 
     slug = models.SlugField()
     objects = models.Manager()
+    grade_id = models.ForeignKey(Grade)
+
+    time_start = models.DateTimeField(
+        _("Start Time"),
+        auto_now=False,
+        blank=True,
+        null=True,
+        help_text=_('Enter time when the trail started on that section.')
+    )
+
+    time_end = models.DateTimeField(
+        _("End Time"),
+        auto_now=False,
+        blank=True,
+        null=True,
+        help_text=_('Enter time when the trail ended on that section.')
+    )
 
     class Meta:
         ordering = ['name']
         unique_together = [
-            'name', 'offset',
+            'name', 'grade_id',
         ]
-        # app_label = 'trail'
-        verbose_name_plural = "Trails"
+        app_label = 'trail'
+        verbose_name_plural = 'Trail Section'
 
 
         def _str__(self):
@@ -116,4 +123,4 @@ class Trail(models.Model):
             # unidecode() represents special characters (unicode data) in ASCII
             new_list = unidecode(' '.join(filtered_words))
             self.slug = slugify(new_list)[:50]
-        super(Trail, self).save(*args, **kwargs)
+        super(TrailSection, self).save(*args, **kwargs)
