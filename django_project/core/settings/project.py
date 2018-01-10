@@ -13,7 +13,6 @@ from .contrib import *  # noqa
 
 # Project apps
 INSTALLED_APPS += (
-    'github_issue',
     'trail',
 )
 

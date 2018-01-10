@@ -38,7 +38,6 @@ urlpatterns = []
 # e.g. /en/reports/
 urlpatterns += i18n_patterns(
     url(r'^site-admin/', include(admin.site.urls)),
-    url(r'^', include('github_issue.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framweork')),
     url(r'^accounts/', include('allauth.urls')),
