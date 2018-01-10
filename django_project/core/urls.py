@@ -40,6 +40,7 @@ urlpatterns += i18n_patterns(
     url(r'^site-admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^trail/', include('trail.urls', namespace='trail')),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:

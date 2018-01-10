@@ -1,18 +1,18 @@
+from __future__ import absolute_import
 # coding=utf-8
 """URI Routing configuration for this apps."""
 from django.conf.urls import url
 
-from ..trail.api_views.trail import TrailListApiView
-from ..trail.api_views.trail_section import TrailSectionListApiView
-from ..trail.api_views.trail_sections import TrailSectionsListApiView
-from ..trail.api_views.category import CategoryListApiView
-from ..trail.api_views.grade import GradeListApiView
-from ..trail.api_views.point_of_interest import PointOfInterestListApiView
-
+from .api_views.trail import TrailListApiView
+from .api_views.trail_section import TrailSectionListApiView
+from .api_views.trail_sections import TrailSectionsListApiView
+from .api_views.category import CategoryListApiView
+from .api_views.grade import GradeListApiView
+from .api_views.point_of_interest import PointOfInterestListApiView
 
 urlpatterns = [
 
-     url(
+    url(
         r'^api/list_trail/',
          TrailListApiView.as_view(),
         name='api-get-trail-list'),
@@ -36,4 +36,4 @@ urlpatterns = [
         r'^api/list_poi/',
         PointOfInterestListApiView.as_view(),
         name='api-get-poi')
-     ]
+]

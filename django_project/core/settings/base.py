@@ -8,7 +8,7 @@ from .utils import absolute_path
 
 ADMINS = (
     ('Tim Sutton', 'tim@kartoza.com'),
-    ('Rischan Mafrur', 'rischan@kartoza.com')
+    ('Alison Mukoma', 'alison@kartoza.com')
 )
 
 MANAGERS = ADMINS
@@ -70,7 +70,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # import SECRET_KEY into current namespace
