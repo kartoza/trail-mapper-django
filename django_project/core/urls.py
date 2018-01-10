@@ -9,6 +9,8 @@ from django.conf.urls.static import static
 from django.http import HttpResponseServerError
 from django.template import loader, Context
 
+from trail import urls as trail_urls
+
 admin.autodiscover()
 handler404 = 'base.views.error_views.custom_404'
 
@@ -36,11 +38,8 @@ urlpatterns = []
 # e.g. /en/reports/
 urlpatterns += i18n_patterns(
     url(r'^site-admin/', include(admin.site.urls)),
-    url(r'^', include('github_issue.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
-    # url(r'^password/reset/done/$', auth_views.password_reset_done,{
-    #     'template_name': 'userena/password_reset_done.html'},
-    #     name='password_reset_done'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framweork')),
     url(r'^accounts/', include('allauth.urls')),
 )
 
