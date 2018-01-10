@@ -7,7 +7,7 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class GradeSerializer(serializers.ModelSerializer):
     """Serializer class for the Grade model."""
 
     class Meta:

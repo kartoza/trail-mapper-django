@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models.trail import Trail
-from ..serializers.trail import TrailSerializer
+from ..models.grade import Grade
+from ..serializers.grade import GradeSerializer
 
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
@@ -11,13 +11,13 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class TrailListApiView(APIView):
+class GradeListApiView(APIView):
     """
-    Api to list all available trails.
+    Api to list all available grades on GET request.
     """
 
     def get(self, request):
-        trails = Trail.objects.all().order_by('name')
+        grades = Grade.objects.all().order_by('name')
 
-        serializer = TrailSerializer(trails, many=True)
+        serializer = GradeSerializer(grades, many=True)
         return Response(serializer.data)
