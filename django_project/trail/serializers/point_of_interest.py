@@ -22,3 +22,4 @@ class POISerializer(serializers.ModelSerializer):
             'trail_section',
             'category'
         ]
+    

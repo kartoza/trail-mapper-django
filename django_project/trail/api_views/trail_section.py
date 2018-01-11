@@ -45,7 +45,7 @@ class TrailSectionFilterByIDAPIView(ListAPIView):
                 Q(name__icontains=query)
             ).distinct()
         return queryset_list
-
+      
 
 class TrailSectionCreateAPIView(CreateAPIView):
     """API to allow client create a new trail section on

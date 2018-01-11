@@ -16,3 +16,4 @@ class CategorySerializer(serializers.ModelSerializer):
             'guid',
             'name'
             ]
+  

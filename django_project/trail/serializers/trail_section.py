@@ -21,3 +21,4 @@ class TrailSectionSerializer(serializers.ModelSerializer):
             'notes',
             'geometry'
         ]
+    

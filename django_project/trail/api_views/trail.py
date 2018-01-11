@@ -37,6 +37,7 @@ class TrailFilterByIDAPIView(ListAPIView):
     search_fields = ['id', 'name']
 
     def get_queryset(self, *args, **kwargs):
+
         """
             Returns trails if a parsed id matches trail record in the database,
             by filtering against an `id` query parameter in the URL.

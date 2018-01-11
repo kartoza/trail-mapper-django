@@ -19,3 +19,4 @@ class TrailSectionsSerializer(serializers.ModelSerializer):
             'section',
             'order'
         ]
+
