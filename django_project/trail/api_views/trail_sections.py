@@ -15,6 +15,6 @@ class TrailSectionsListApiView(ListAPIView):
        Api to list all available trail sections on GET request.
     """
 
-    queryset = TrailSections.Category.objects.all()
+    queryset = TrailSections.objects.all()
     serializer_class = TrailSectionsSerializer
     lookup_field = 'slug'

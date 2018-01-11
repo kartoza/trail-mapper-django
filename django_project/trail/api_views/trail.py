@@ -15,6 +15,6 @@ class TrailListApiView(ListAPIView):
     Api to list all available trails.
     """
 
-    queryset = Trail.Category.objects.all()
+    queryset = Trail.objects.all()
     serializer_class = TrailSerializer
     lookup_field = 'slug'

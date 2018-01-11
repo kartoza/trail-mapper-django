@@ -15,6 +15,6 @@ class PointOfInterestListApiView(ListAPIView):
        Api to list all available point of interest on GET request.
     """
 
-    queryset = POI.Category.objects.all()
+    queryset = POI.objects.all()
     serializer_class = POISerializer
     lookup_field = 'slug'
