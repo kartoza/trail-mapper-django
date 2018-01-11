@@ -98,7 +98,7 @@ collectstatic:
 	#We need to run collect static in the same context as the running
 	# uwsgi container it seems so I use docker exec here
 	# no -it flag so we can run over remote shell
-	@docker exec $(PROJECT_ID)_uwsgi python manage.py collectstatic --noinput
+	@docker exec trail-uwsgi python manage.py collectstatic --noinput
 
 reload:
 	@echo
