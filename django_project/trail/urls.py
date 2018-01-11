@@ -4,7 +4,8 @@ from __future__ import absolute_import
 from django.conf.urls import url
 
 from .api_views.trail import TrailListApiView, TrailFilterByIDAPIView
-from .api_views.trail_section import TrailSectionListApiView
+from .api_views.trail_section import (TrailSectionListApiView,
+                                      TrailSectionFilterByIDAPIView)
 from .api_views.trail_sections import TrailSectionsListApiView
 from .api_views.category import CategoryListApiView
 from .api_views.grade import GradeListApiView
@@ -24,6 +25,10 @@ urlpatterns = [
         r'^api/list_trail_section/',
         TrailSectionListApiView.as_view(),
         name='api-get-trail-section'),
+    url(
+        r'^api/trail_section/(?P<trail_section_id>.+)/',
+        TrailSectionFilterByIDAPIView.as_view(),
+        name='api-get-trail-section-by-id'),
     url(
         r'^api/list_trail_sections/',
         TrailSectionsListApiView.as_view(),
