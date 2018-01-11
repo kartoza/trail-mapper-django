@@ -35,4 +35,3 @@ class TrailSectionFilterByIDAPIView(ListAPIView):
         if trail_section_id is not None:
             queryset = queryset.objects.filter(id=trail_section_id)
         return queryset
-

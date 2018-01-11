@@ -1,5 +1,8 @@
-from rest_framework.generics import ListAPIView
-
+from rest_framework.generics import (
+    ListAPIView,
+    ListCreateAPIView,
+    CreateAPIView
+    )
 from ..models.trail import Trail
 from ..serializers.trail import TrailSerializer
 
@@ -38,3 +41,11 @@ class TrailFilterByIDAPIView(ListAPIView):
         if trail_id is not None:
             queryset = queryset.objects.filter(id=trail_id)
         return queryset
+
+
+class TrailCreateAPIView(CreateAPIView):
+    """API to allow client create a new Trail on
+    the server.
+    """
+    queryset = Trail.objects.all()
+    serializer_class = TrailSerializer

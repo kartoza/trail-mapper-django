@@ -3,7 +3,11 @@ from __future__ import absolute_import
 """URI Routing configuration for this apps."""
 from django.conf.urls import url
 
-from .api_views.trail import TrailListApiView, TrailFilterByIDAPIView
+from .api_views.trail import (
+    TrailListApiView,
+    TrailFilterByIDAPIView,
+    TrailCreateAPIView
+    )
 from .api_views.trail_section import (TrailSectionListApiView,
                                       TrailSectionFilterByIDAPIView)
 from .api_views.trail_sections import TrailSectionsListApiView
@@ -17,6 +21,10 @@ urlpatterns = [
         r'^api/list_trail/',
          TrailListApiView.as_view(),
         name='api-get-trail-list'),
+    url(
+        r'^api/create_trail/',
+        TrailCreateAPIView.as_view(),
+        name='api-trail-create'),
     url(
         r'^api/trail/(?P<trail_id>.+)/',
         TrailFilterByIDAPIView.as_view(),
