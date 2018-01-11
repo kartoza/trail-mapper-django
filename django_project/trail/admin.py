@@ -1,19 +1,19 @@
 from django.contrib.gis import admin
 
-from trail.models.trail import Trail
-from trail.models.trail_section import TrailSection
-from trail.models.grade import Grade
-from trail.models.trail_sections import TrailSections
-from trail.models.category import Category
-from trail.models.point_of_interest import POI
+from .models.trail import Trail
+from .models.trail_section import TrailSection
+from .models.grade import Grade
+from .models.trail_sections import TrailSections
+from .models.category import Category
+from .models.point_of_interest import POI
 
 
 class TrailAdmin(admin.ModelAdmin):
     """Trail admin model."""
 
-    list_display = ['name', 'guid', 'offset']
-    search_fields = ('name', 'colour', 'offset',)
-    list_filter = ('name', 'colour', 'offset',)
+    list_display = ['guid', 'name', 'offset']
+    search_fields = ('guid', 'name', 'offset',)
+    list_filter = ('guid', 'name', 'offset',)
     list_per_page = 10
 
     def queryset(self, request):
@@ -30,7 +30,7 @@ class TrailAdmin(admin.ModelAdmin):
 
 class TrailSectionAdmin(admin.ModelAdmin):
     """Trail section model admin."""
-    list_display = ['name', 'image', 'time_start', 'time_end']
+    list_display = ['guid', 'name', 'image', 'time_start', 'time_end']
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
@@ -51,7 +51,7 @@ class TrailSectionAdmin(admin.ModelAdmin):
 class GradeAdmin(admin.ModelAdmin):
     """Grade section model admin."""
 
-    list_display = ['name', 'image']
+    list_display = ['guid', 'name', 'image']
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
@@ -92,7 +92,7 @@ class TrailSectionsAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     """Category model admin."""
 
-    list_display = ['name']
+    list_display = ['guid', 'name']
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
@@ -113,7 +113,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class POIAdmin(admin.ModelAdmin):
     """Category model admin."""
 
-    list_display = ['name']
+    list_display = ['guid', 'name', 'image']
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
