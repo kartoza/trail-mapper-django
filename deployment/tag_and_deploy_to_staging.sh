@@ -19,14 +19,14 @@ then
 	make dbbackup
 	make mediasync
     # Sync the latest backups and media to staging from production
-    rsync -L  backups/latest.dmp staging.changelog.qgis.org:/home/trail-mapper-django/deployment/backups/
-    rsync -r -v media/ staging.changelog.qgis.org:/home/trail-mapper-django/deployment/media
+    rsync -L  backups/latest.dmp staging.trailmapper.kartoza.com:/home/trail-mapper-django/deployment/backups/
+    rsync -r -v media/ staging.trailmapper.kartoza.com:/home/trail-mapper-django/deployment/media
     # Tag the release and push to main repo
 	git tag $VERSION
 	git push --tags upstream 
     # Check it out on the server
     # No migrations are run - you should do that manually for now
-	ssh staging.changelog.qgis.org "cd /home/trail-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
+	ssh staging.trailmapper.kartoza.com "cd /home/trail-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
 else
 	echo "Tag and deploy to staging aborted."
 fi
