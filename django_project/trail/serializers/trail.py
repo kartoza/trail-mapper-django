@@ -19,8 +19,7 @@ class TrailSerializer(serializers.ModelSerializer):
             'image',
             'notes',
             'colour',
-            'geometry',
+            'geom',
             'offset',
-            'slug'
         ]
 

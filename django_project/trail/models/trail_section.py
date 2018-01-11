@@ -54,7 +54,7 @@ class TrailSection(models.Model):
             '"Choose File" button above.')
     )
 
-    geometry = models.PointField(srid=4326)
+    geom = models.PointField(srid=4326)
 
 
     slug = models.SlugField(

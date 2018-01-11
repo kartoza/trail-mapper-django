@@ -4,7 +4,8 @@ from rest_framework.filters import SearchFilter
 
 from rest_framework.generics import (
     ListAPIView,
-    CreateAPIView
+    CreateAPIView,
+    UpdateAPIView
     )
 
 from ..models.trail_section import TrailSection
@@ -53,3 +54,13 @@ class TrailSectionCreateAPIView(CreateAPIView):
     """
     queryset = TrailSection.objects.all()
     serializer_class = TrailSectionSerializer
+
+
+
+class TrailSectionUpdateAPIView(UpdateAPIView):
+    """API to allow client update an existing Trail section
+     entry on the server.
+    """
+    queryset = TrailSection.objects.all()
+    serializer_class = TrailSectionSerializer
+    lookup_field = 'slug'

@@ -9,8 +9,9 @@ from .api_views.trail import (
     )
 from .api_views.trail_section import (
     TrailSectionListApiView,
-    TrailSectionCreateAPIView
-)
+    TrailSectionCreateAPIView,
+    TrailSectionUpdateAPIView
+    )
 from .api_views.trail_sections import TrailSectionsListApiView
 from .api_views.category import CategoryListApiView
 from .api_views.grade import GradeListApiView
@@ -38,6 +39,10 @@ urlpatterns = [
         r'^api/create_trail_section/',
         TrailSectionCreateAPIView.as_view(),
         name='api-trail-section-create'),
+    url(
+        r'^api/(?P<slug>[\w-]+)/update_trail_section/',
+        TrailSectionUpdateAPIView.as_view(),
+        name='api-trail-section-update'),
     url(
         r'^api/list_trail_sections/',
         TrailSectionsListApiView.as_view(),

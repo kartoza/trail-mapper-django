@@ -18,7 +18,7 @@ class POISerializer(serializers.ModelSerializer):
             'name',
             'image',
             'notes',
-            'geometry',
+            'geom',
             'trail_section',
             'category'
         ]

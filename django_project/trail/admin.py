@@ -11,10 +11,26 @@ from .models.point_of_interest import POI
 class TrailAdmin(admin.ModelAdmin):
     """Trail admin model."""
 
-    list_display = ['guid', 'name', 'offset']
-    search_fields = ('guid', 'name', 'offset',)
-    list_filter = ('guid', 'name', 'offset',)
+    list_display = [
+        'guid',
+        'name',
+        'offset',
+        'geom'
+    ]
+    search_fields = (
+        'guid',
+        'name',
+        'offset',
+    )
+    list_filter = (
+        'guid',
+        'name',
+        'offset',
+    )
     list_per_page = 10
+
+    prepopulated_fields = {'slug': ('name',),}
+
 
     def queryset(self, request):
         """Ensure we use the correct manager.
@@ -34,6 +50,8 @@ class TrailSectionAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
+
+    prepopulated_fields = {'slug': ('name',), }
 
     def queryset(self, request):
         """Ensure we use the correct manager.
@@ -55,6 +73,8 @@ class GradeAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
     list_per_page = 10
+
+    prepopulated_fields = {'slug': ('name',), }
 
     def queryset(self, request):
         """Ensure we use the correct manager.
