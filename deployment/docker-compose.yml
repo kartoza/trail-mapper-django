@@ -93,7 +93,7 @@ web:
     - uwsgi:uwsgi
   ports:
     - "80:8080"
-    - "4430:443"
+    - "443:443"
   restart: on-failure:5
 
 # This is the entry point for a development server.
@@ -125,9 +125,9 @@ devweb:
     - db:db
   ports:
     # for django test server
-    - "61202:8080"
+    - "60202:8080"
     # for ssh
-    - "61203:22"
+    - "60203:22"
 
 btsync-db:                                                                                                                                   
   # BTSync backups for database dumps
