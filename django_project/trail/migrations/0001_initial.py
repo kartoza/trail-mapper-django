@@ -16,9 +16,9 @@ class Migration(migrations.Migration):
             name='Category',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
                 ('name', models.CharField(help_text='Enter Category name.', max_length=255, verbose_name='Name of Category')),
                 ('image', models.ImageField(help_text='An image of the trail section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_category', null=True, verbose_name='Image file', blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.LineStringField(help_text='Enter the geometry of the tcategory (as line string).', srid=4326, null=True, verbose_name='Geometry', blank=True)),
                 ('slug', models.SlugField(null=True, blank=True)),
             ],
             options={
@@ -37,7 +37,6 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['name'],
-                'verbose_name_plural': 'Grades',
             },
         ),
         migrations.CreateModel(
@@ -49,6 +48,7 @@ class Migration(migrations.Migration):
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named POI', max_length=300, null=True, verbose_name='Notes on named POI', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/poi', null=True, verbose_name='Image file', blank=True)),
                 ('slug', models.SlugField(null=True, blank=True)),
+                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
                 ('category', models.ForeignKey(to='trail.Category')),
             ],
             options={
@@ -60,19 +60,17 @@ class Migration(migrations.Migration):
             name='Trail',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(help_text='Enter name of the Trail.', max_length=255, verbose_name='Name of Trail')),
                 ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
+                ('name', models.CharField(help_text='Enter name of the Trail.', max_length=255, verbose_name='Name of Trail')),
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named trail', max_length=300, null=True, verbose_name='Notes on named Trail', blank=True)),
                 ('offset', models.CharField(help_text='Enter offset value i.e -2', max_length=255, null=True, verbose_name='Offset', blank=True)),
                 ('colour', models.CharField(help_text='Enter colour of the trail.', max_length=255, null=True, verbose_name='Colour', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail', null=True, verbose_name='Image file', blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326)),
+                ('colour', models.CharField(help_text='Enter colour hex of the trail.', max_length=255, null=True, verbose_name='Colour', blank=True)),
+                ('offset', models.IntegerField(default=0, help_text='Enter offset value i.e -2', null=True, verbose_name='Offset', blank=True)),
+                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
                 ('slug', models.SlugField()),
             ],
-            options={
-                'ordering': ['name'],
-                'verbose_name_plural': 'Trails',
-            },
         ),
         migrations.CreateModel(
             name='TrailSection',
@@ -82,14 +80,13 @@ class Migration(migrations.Migration):
                 ('guid', models.UUIDField(default=uuid.uuid4, verbose_name='GUID', editable=False)),
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named trail', max_length=300, null=True, verbose_name='Notes on named Trail', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_sections', null=True, verbose_name='Image file', blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.LineStringField(help_text='Enter the geometry of the trail section (as line string).', srid=4326, null=True, verbose_name='Geometry', blank=True)),
+                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326)),
                 ('slug', models.SlugField(null=True, blank=True)),
                 ('time_start', models.DateTimeField(help_text='Enter time when the trail started on that section.', null=True, verbose_name='Start Time', blank=True)),
                 ('time_end', models.DateTimeField(help_text='Enter time when the trail ended on that section.', null=True, verbose_name='End Time', blank=True)),
                 ('grade_id', models.ForeignKey(to='trail.Grade')),
             ],
             options={
-                'ordering': ['name'],
                 'verbose_name_plural': 'Trail Section',
             },
         ),
@@ -107,17 +104,9 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Trail Sections',
             },
         ),
-        migrations.AlterUniqueTogether(
-            name='trail',
-            unique_together=set([('name', 'offset')]),
-        ),
         migrations.AddField(
             model_name='poi',
             name='trail_section',
             field=models.ForeignKey(to='trail.TrailSection'),
-        ),
-        migrations.AlterUniqueTogether(
-            name='trailsection',
-            unique_together=set([('name', 'grade_id')]),
         ),
     ]

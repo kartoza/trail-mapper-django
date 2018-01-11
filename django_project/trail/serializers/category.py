@@ -12,4 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('guid', 'name')
+        fields = [
+            'guid',
+            'name'
+            ]
