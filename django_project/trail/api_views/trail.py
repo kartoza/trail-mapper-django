@@ -1,6 +1,11 @@
+from django.db.models import Q
+
+from rest_framework.filters import (
+    SearchFilter,
+    OrderingFilter
+)
 from rest_framework.generics import (
     ListAPIView,
-    ListCreateAPIView,
     CreateAPIView
     )
 
@@ -29,19 +34,23 @@ class TrailFilterByIDAPIView(ListAPIView):
        with the trail ID parsed in the url.
     """
     serializer_class = TrailSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['id', 'name']
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         """
             Returns trails if a parsed id matches trail record in the database,
             by filtering against an `id` query parameter in the URL.
         """
 
-        queryset = Trail.objects.all()
-        trail_id = self.request.query_params.get('trail_id', None)
+        queryset_list = Trail.objects.all()
+        query = self.request.Get.get('q')
+        if query:
+            queryset_list = queryset_list.get(
+                Q(name__icontains=query)
+            ).distinct()
+        return queryset_list
 
-        if trail_id is not None:
-            queryset = queryset.objects.filter(id=trail_id)
-        return queryset
 
 
 class TrailCreateAPIView(CreateAPIView):
