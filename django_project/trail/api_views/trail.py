@@ -8,7 +8,6 @@ from rest_framework.generics import (
     ListAPIView,
     CreateAPIView
     )
-
 from ..models.trail import Trail
 from ..serializers.trail import TrailSerializer
 
@@ -20,8 +19,7 @@ __copyright__ = 'kartoza.com'
 
 
 class TrailListApiView(ListAPIView):
-    """
-    Api to list all available trails.
+    """Api to list all available trails.
     """
 
     queryset = Trail.objects.all()
@@ -38,8 +36,7 @@ class TrailFilterByIDAPIView(ListAPIView):
     search_fields = ['id', 'name']
 
     def get_queryset(self, *args, **kwargs):
-        """
-            Returns trails if a parsed id matches trail record in the database,
+        """Returns trails if a parsed id matches trail record in the database,
             by filtering against an `id` query parameter in the URL.
         """
 
@@ -55,8 +52,8 @@ class TrailFilterByIDAPIView(ListAPIView):
 
 class TrailCreateAPIView(CreateAPIView):
     """API to allow client create a new Trail on
-    the server.
+       the server.
     """
     queryset = Trail.objects.all()
     serializer_class = TrailSerializer
-
+    

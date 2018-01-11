@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 # coding=utf-8
 """URI Routing configuration for this apps."""
 from django.conf.urls import url
@@ -7,12 +6,10 @@ from .api_views.trail import (
     TrailListApiView,
     TrailCreateAPIView
     )
-
 from .api_views.trail_section import (
     TrailSectionListApiView,
     TrailSectionCreateAPIView
 )
-
 from .api_views.trail_sections import TrailSectionsListApiView
 from .api_views.category import CategoryListApiView
 from .api_views.grade import GradeListApiView

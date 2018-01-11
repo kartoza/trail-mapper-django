@@ -22,3 +22,4 @@ class TrailSerializer(serializers.ModelSerializer):
             'geometry',
             'offset'
         ]
+
