@@ -1,4 +1,7 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView
+    )
 
 from ..models.trail_section import TrailSection
 from ..serializers.trail_section import TrailSectionSerializer
@@ -8,6 +11,8 @@ __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '24/10/17'
 __license__ = "GPL"
 __copyright__ = 'kartoza.com'
+
+
 
 
 class TrailSectionListApiView(ListAPIView):
@@ -35,3 +40,12 @@ class TrailSectionFilterByIDAPIView(ListAPIView):
         if trail_section_id is not None:
             queryset = queryset.objects.filter(id=trail_section_id)
         return queryset
+
+
+
+class TrailSectionCreateAPIView(CreateAPIView):
+    """API to allow client create a new trail section on
+    the server.
+    """
+    queryset = TrailSection.objects.all()
+    serializer_class = TrailSectionSerializer

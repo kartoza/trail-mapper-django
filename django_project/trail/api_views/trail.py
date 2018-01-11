@@ -1,6 +1,5 @@
 from rest_framework.generics import (
     ListAPIView,
-    ListCreateAPIView,
     CreateAPIView
     )
 from ..models.trail import Trail
