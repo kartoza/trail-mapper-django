@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Use this to build a production image of the projecta-uwsgi"
+echo "Use this to build a production image of the trail-mapper-django-uwsgi"
 echo "docker, push the image upstream with tag :latest and "
 echo "a versioned tag e.g. :1.6.19."
 echo "Useage:"
@@ -30,7 +30,7 @@ then
     # Now build the image and tag it
     cd docker
 	docker build -t kartoza/trail-uwsgi:latest -f Dockerfile-prod .
-    docker tag kartoza/trail-uwsgi:latest kartoza/projecta-uwsgi:$VERSION
+    docker tag kartoza/trail-uwsgi:latest kartoza/trail-mapper-django-uwsgi:$VERSION
     docker push kartoza/trail-uwsgi:latest
     docker push kartoza/trail-uwsgi:$VERSION
     cd -

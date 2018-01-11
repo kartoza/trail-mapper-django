@@ -61,18 +61,18 @@ def get_vars():
 
     :returns: A tuple containing the following:
         * base_path: Workspace dir e.g. ``/home/foo/python``
-        * code_path: Project dir e.g. ``/home/foo/python/projecta``
+        * code_path: Project dir e.g. ``/home/foo/python/trail-mapper-django``
         * git_url: Url for git checkout - use http for read only checkout
-        * repo_alias: Name of checkout folder e.g. ``projecta``
-        * site_name: Name for the web site e.g. ``projecta``
+        * repo_alias: Name of checkout folder e.g. ``trail-mapper-django``
+        * site_name: Name for the web site e.g. ``TrailMapper``
 
     :rtype: tuple
     """
     setup_env()
-    site_name = 'projecta'
+    site_name = 'trail-mapper-django'
     base_path = '/home/web/'
-    git_url = 'http://github.com/timlinux/projecta.git'
-    repo_alias = 'projecta'
+    git_url = 'http://github.com/sonlinux/trail-mapper-django.git'
+    repo_alias = 'trail-mapper-django'
     code_path = os.path.abspath(os.path.join(base_path, repo_alias))
     return base_path, code_path, git_url, repo_alias, site_name
 
@@ -86,7 +86,7 @@ def update_venv(code_path):
 
     e.g.::
 
-        fab -H localhost update_venv:/home/timlinux/dev/python/projecta
+        fab -H localhost update_venv:/home/sonlinux/dev/python/trail-mapper-django
     """
     setup_venv(code_path, requirements_file='REQUIREMENTS.txt')
     #yuglify needed by django-compress needs to have node installed which
@@ -131,7 +131,7 @@ def update_apache(code_path):
     :param code_path: Usually '/home/web/<site_name>'
 
     """
-    git_url = 'https://api.github.com/repos/timlinux/projecta/issues'
+    git_url = 'https://api.github.com/repos/sonlinux/trail-mapper-django/issues'
     git_user = prompt(
         'Please enter the github user account that issues submitted via the\n'
         'web ui should be created as. This will be written into the apache\n'
@@ -140,7 +140,7 @@ def update_apache(code_path):
     git_password = getpass.getpass()
     domain = 'changelog.kartoza.com'
     setup_apache(
-        site_name='projecta',
+        site_name='trail-mapper-django',
         code_path=code_path,
         domain=domain,
         github_url=git_url,
@@ -184,7 +184,7 @@ def deploy():
     # if we are testing under vagrant, deploy our local media and db
     #if 'vagrant' in env.fg.home:
     #    with cd(code_path):
-    #        run('cp /vagrant/projecta.db .')
+    #        run('cp /vagrant/trail-mapper-django.db .')
     #        run('touch django_project/core/wsgi.py')
 
     #sync_media_to_server()
@@ -214,7 +214,7 @@ def freshen():
 
     """
     base_path, code_path, git_url, repo_alias, site_name = get_vars()
-    git_url = 'http://github.com/timlinux/projecta.git'
+    git_url = 'http://github.com/sonlinux/trail-mapper-django.git'
     update_git_checkout(base_path, git_url, repo_alias)
     put_private()
     update_venv(code_path)
@@ -245,9 +245,9 @@ def sync_media_to_server():
 
     # Now our sqlite db
     remote_path = os.path.join(
-        code_path, 'resources', 'sqlite', 'projecta.db')
+        code_path, 'resources', 'sqlite', 'trail-mapper-django.db')
     local_path = os.path.join(
-        os.path.dirname(__file__), 'resources/sqlite/projecta.db')
+        os.path.dirname(__file__), 'resources/sqlite/trail-mapper-django.db')
     rsync_project(
         remote_path,
         local_dir=local_path,
@@ -273,7 +273,7 @@ def sync_project_to_server():
             '.git',
             '*.dmp',
             '.DS_Store',
-            'projecta.db',
+            'trail-mapper-django.db',
             'venv',
             'django_project/static'])
     update_migrations()
@@ -355,8 +355,8 @@ def get_live_db():
 def get_docker_live_db():
     """Get a copy of the db as deployed in docker on the remote host."""
     date = run('date +%d-%B-%Y')
-    my_file = 'projecta-%s.dmp' % date
-    ip = run("export PATH=$PATH:/home/timlinux/bin/docker-helpers/; dipall | grep projecta_db_1 | awk '{print $3}'")
+    my_file = 'trail-mapper-django-%s.dmp' % date
+    ip = run("export PATH=$PATH:/home/sonlinux/bin/docker-helpers/; dipall | grep trail-mapper-django_db_1 | awk '{print $3}'")
     run(
         'export PGPASSWORD=docker; '
         'pg_dump -Fc -f /tmp/%s -h %s -U docker gis' % (my_file, ip))
@@ -366,7 +366,7 @@ def get_docker_live_db():
 @task
 def get_docker_live_media():
     """Get the live media - will overwrite your local copy."""
-    local('rsync -ave ssh %s:/home/timlinux/production-sites/projecta/django_project/media deployment/media' % env['host_string'])
+    local('rsync -ave ssh %s:/home/sonlinux/production-sites/trail-mapper-django/django_project/media deployment/media' % env['host_string'])
 
 
 @hosts('kartoza3')

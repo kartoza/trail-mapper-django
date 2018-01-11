@@ -81,7 +81,7 @@ Now set these options:
 
 * **Name:** Django Server
 * **Host:** 0.0.0.0
-* **Port:** (use the http port specified in the docker-compose.yml file, e.g. 8080)`*` **Run browser** If checked, it will open the url after you click run. You should be able to access the running projecta on 0.0.0.0:61202 (the port that mapped to 8080)
+* **Port:** (use the http port specified in the docker-compose.yml file, e.g. 8080)`*` **Run browser** If checked, it will open the url after you click run. You should be able to access the running trail-mapper-django on 0.0.0.0:61202 (the port that mapped to 8080)
 * **Additional options:** ``--settings=core.settings.dev_docker``
 * **Environment vars:** Leave as default unless you need to add something to the env
 * **Python interpreter:** Ensure it is set you your remote interpreter (should be

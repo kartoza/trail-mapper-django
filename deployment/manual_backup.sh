@@ -8,8 +8,8 @@ MYBACKUPDIR=${MYBASEDIR}/${YEAR}/${MONTH}
 mkdir -p ${MYBACKUPDIR}
 
 cd ${MYBACKUPDIR}
-docker exec -ti projecta-db /bin/bash -c "PGPASSWORD=docker pg_dump -Fc -f /tmp/latest.dmp -h localhost -U docker gis"
-docker cp projecta-db:/tmp/latest.dmp PG_projecta-${MYDATE}.dmp
+docker exec -ti trail-mapper-django-db /bin/bash -c "PGPASSWORD=docker pg_dump -Fc -f /tmp/latest.dmp -h localhost -U docker gis"
+docker cp trail-mapper-django-db:/tmp/latest.dmp PG_projecta-${MYDATE}.dmp
 
 cd -
 rm backups/latest.dmp

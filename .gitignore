@@ -122,4 +122,4 @@ deployment/btsync-db.env.PRODUCTION
 deployment/btsync-media.env.PRODUCTION
 # These don't get versioned since they are generated on the fly 
 deployment/docker/Dockerfile-prod
-deployment/docker/projecta.tar.gz
+deployment/docker/trail-mapper-django.tar.gz
