@@ -1,3 +1,7 @@
+from django.db.models import Q
+
+from rest_framework.filters import SearchFilter
+
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView
@@ -13,8 +17,6 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-
-
 class TrailSectionListApiView(ListAPIView):
     """Api to list all available trail section data on GET request.
     """
@@ -28,19 +30,21 @@ class TrailSectionFilterByIDAPIView(ListAPIView):
        with the trail section ID parsed in the url.
     """
     serializer_class = TrailSectionSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['id', 'name']
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         """Returns trails if a parsed id matches trail section record
-            in the database by filtering against an `id` query parameter in the URL.
+           in the database by filtering against an `id` query parameter in the URL.
         """
 
-        queryset = TrailSection.objects.all()
-        trail_section_id = self.request.query_params.get('trail_section_id', None)
-
-        if trail_section_id is not None:
-            queryset = queryset.objects.filter(id=trail_section_id)
-        return queryset
-
+        queryset_list = TrailSection.objects.all()
+        query = self.request.Get.get('q')
+        if query:
+            queryset_list = queryset_list.get(
+                Q(name__icontains=query)
+            ).distinct()
+        return queryset_list
 
 
 class TrailSectionCreateAPIView(CreateAPIView):
