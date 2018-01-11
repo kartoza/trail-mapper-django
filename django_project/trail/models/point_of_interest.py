@@ -58,7 +58,7 @@ class POI(models.Model):
         blank=True
     )
 
-    geometry = models.PointField(
+    geom = models.PointField(
         geography=True,
         blank=True,
         null=True,
