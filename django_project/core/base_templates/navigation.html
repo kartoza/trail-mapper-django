@@ -23,14 +23,6 @@
                 <li>
                     <a href="{% url 'home' %}">All Projects</a>
                 </li>
-                <li>
-                    <a href="{% url 'project-create' %}">Create Project</a>
-                </li>
-                {% if is_logged_in and unapproved_projects %}
-                    <li>
-                        <a href="{% url 'pending-project-list' %}">Projects Pending Approval</a>
-                    </li>
-                {% endif %}
             </ul>
         </li>
         {% if the_project %}

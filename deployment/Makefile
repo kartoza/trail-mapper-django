@@ -1,5 +1,5 @@
 # Dont use spaces, hyphens or underscores in the project id
-PROJECT_ID := trailmapperdjango
+PROJECT_ID := trail
 
 SHELL := /bin/bash
 
@@ -98,7 +98,7 @@ collectstatic:
 	#We need to run collect static in the same context as the running
 	# uwsgi container it seems so I use docker exec here
 	# no -it flag so we can run over remote shell
-	@docker exec trail-uwsgi python manage.py collectstatic --noinput
+	@docker exec $(PROJECT_ID)-uwsgi python manage.py collectstatic --noinput
 
 reload:
 	@echo

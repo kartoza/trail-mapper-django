@@ -15,7 +15,7 @@ then
 	VERSION=$1
 	make dbbackup
 	make mediasync
-	ssh changelog.qgis.org "cd /home/trail-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
+	ssh trailmapper.kartoza.com "cd /home/trail-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
 else
 	echo "Deploy to production aborted."
 fi
