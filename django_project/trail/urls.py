@@ -34,6 +34,7 @@ urlpatterns = [
         r'^api/create_trail_section/',
         TrailSectionCreateAPIView.as_view(),
         name='api-trail-section-create'),
+
     url(
         r'^api/list_trail_sections/',
         TrailSectionsListApiView.as_view(),

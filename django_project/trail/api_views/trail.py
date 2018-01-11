@@ -58,3 +58,4 @@ class TrailCreateAPIView(CreateAPIView):
     """
     queryset = Trail.objects.all()
     serializer_class = TrailSerializer
+    
