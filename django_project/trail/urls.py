@@ -4,7 +4,8 @@ from django.conf.urls import url
 
 from .api_views.trail import (
     TrailListApiView,
-    TrailCreateAPIView
+    TrailCreateAPIView,
+    TrailUpdateAPIView
     )
 from .api_views.trail_section import (
     TrailSectionListApiView,
@@ -25,6 +26,10 @@ urlpatterns = [
         r'^api/create_trail/',
         TrailCreateAPIView.as_view(),
         name='api-trail-create'),
+    url(
+        r'^api/(?P<slug>[\w-]+)/update_trail/',
+        TrailUpdateAPIView.as_view(),
+        name='api-trail-update'),
     url(
         r'^api/list_trail_section/',
         TrailSectionListApiView.as_view(),
