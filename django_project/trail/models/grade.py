@@ -6,7 +6,12 @@ import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 from django.conf.global_settings import MEDIA_ROOT
+
+from unidecode import unidecode
+
+from core.settings.contrib import STOP_WORDS
 
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
@@ -16,12 +21,11 @@ __copyright__ = 'kartoza.com'
 
 
 class Grade(models.Model):
-    "Model definition of a Grade."
+    "Model definition of a Trail."
 
     guid = models.UUIDField(
         _('GUID'),
         primary_key=False,
-        null = False,
         default=uuid_lib.uuid4,
         editable=False)
 
@@ -52,10 +56,11 @@ class Grade(models.Model):
     class Meta:
         ordering = ['name']
         app_label = 'trail'
+        verbose_name_plural = "Grades"
 
 
-    def _str__(self):
-        return self.__unicode__()
+        def _str__(self):
+            return self.__unicode__()
 
-    def __unicode__(self):
-        return '%s' % (self.name)
+        def __unicode__(self):
+            return '%s' % (self.name)

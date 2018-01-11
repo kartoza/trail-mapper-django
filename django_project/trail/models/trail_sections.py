@@ -15,7 +15,7 @@ __copyright__ = 'kartoza.com'
 
 
 class TrailSections(models.Model):
-    "Model definition of a Trail Sections."
+    "Model definition of a Trail Section."
 
     order = models.CharField(
         _('Order'),
@@ -40,8 +40,8 @@ class TrailSections(models.Model):
         verbose_name_plural = 'Trail Sections'
 
 
-    def _str__(self):
-        return self.__unicode__()
+        def _str__(self):
+            return self.__unicode__()
 
-    def __unicode__(self):
-        return '%s' % (self.order)
+        def __unicode__(self):
+            return '%s' % (self.order)
