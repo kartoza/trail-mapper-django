@@ -21,11 +21,12 @@ __copyright__ = 'kartoza.com'
 
 
 class Grade(models.Model):
-    "Model definition of a Trail."
+    "Model definition of a Grade."
 
     guid = models.UUIDField(
         _('GUID'),
         primary_key=False,
+        null = False,
         default=uuid_lib.uuid4,
         editable=False)
 
@@ -56,11 +57,10 @@ class Grade(models.Model):
     class Meta:
         ordering = ['name']
         app_label = 'trail'
-        verbose_name_plural = "Grades"
 
 
-        def _str__(self):
-            return self.__unicode__()
+    def _str__(self):
+        return self.__unicode__()
 
-        def __unicode__(self):
-            return '%s' % (self.name)
+    def __unicode__(self):
+        return '%s' % (self.name)

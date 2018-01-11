@@ -12,5 +12,6 @@ class TrailSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TrailSection
-        fields = ('name', 'grade', 'notes',
-                  'geometry', 'image', 'guid', 'id')
+        fields = ('guid', 'name', 'image','grade', 'notes',
+                  'geometry')
+        url_field_name = 'image'

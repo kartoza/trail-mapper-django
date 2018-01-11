@@ -1,5 +1,11 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import (
+    DestroyAPIView,
+    ListAPIView,
+    UpdateAPIView,
+    RetrieveAPIView
+    )
 
 from ..models.grade import Grade
 from ..serializers.grade import GradeSerializer
@@ -11,13 +17,16 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class GradeListApiView(APIView):
+class GradeListApiView(ListAPIView):
     """
     Api to list all available grades on GET request.
     """
 
-    def get(self, request):
-        grades = Grade.objects.all().order_by('name')
+    queryset = Grade.objects.all()
+    serializer_class = GradeSerializer
+    lookup_field = 'slug'
 
-        serializer = GradeSerializer(grades, many=True)
-        return Response(serializer.data)
+class GradeUpdateAPIView(UpdateAPIView):
+    queryset = Grade.objects.all()
+    serializer_class = GradeSerializer
+    lookup_field = 'slug'

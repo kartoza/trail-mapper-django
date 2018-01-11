@@ -12,4 +12,6 @@ class POISerializer(serializers.ModelSerializer):
 
     class Meta:
         model = POI
-        fields = ('name', 'notes', 'guid')
+        fields = ('guid', 'name', 'image',
+                  'notes', 'geometry', 'trail_section', 'category')
+        url_field_name = 'image'

@@ -28,6 +28,7 @@ class POI(models.Model):
     guid = models.UUIDField(
         _('GUID'),
         db_index = False,
+        null=False,
         default = uuid_lib.uuid4,
         editable = False
     )
@@ -61,6 +62,9 @@ class POI(models.Model):
         null=True,
         blank=True
     )
+
+    geometry = models.PointField(srid=4326)
+
     objects = models.Manager()
     category = models.ForeignKey(Category)
     trail_section = models.ForeignKey(TrailSection)
@@ -71,8 +75,8 @@ class POI(models.Model):
         verbose_name_plural = 'Points of Interest (POIs)'
 
 
-        def _str__(self):
-            return self.__unicode__()
+    def _str__(self):
+        return self.__unicode__()
 
-        def __unicode__(self):
-            return '%s' % (self.name)
+    def __unicode__(self):
+        return '%s' % (self.name)

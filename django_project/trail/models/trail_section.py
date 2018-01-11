@@ -27,6 +27,7 @@ class TrailSection(models.Model):
     guid = models.UUIDField(
         _('GUID'),
         db_index=False,
+        null=False,
         default=uuid_lib.uuid4,
         editable=False
     )
@@ -56,12 +57,7 @@ class TrailSection(models.Model):
             '"Choose File" button above.')
     )
 
-    geometry = models.LineStringField(
-        _('Geometry'),
-        null=True,
-        blank=True,
-        help_text = _('Enter the geometry of the trail section (as line string).')
-    )
+    geometry = models.PointField(srid=4326)
 
 
     slug = models.SlugField(
@@ -88,16 +84,12 @@ class TrailSection(models.Model):
     )
 
     class Meta:
-        ordering = ['name']
-        unique_together = [
-            'name', 'grade_id',
-        ]
         app_label = 'trail'
         verbose_name_plural = 'Trail Section'
 
 
-        def _str__(self):
-            return self.__unicode__()
+    def _str__(self):
+        return self.__unicode__()
 
-        def __unicode__(self):
-            return '%s' % (self.name)
+    def __unicode__(self):
+        return '%s' % (self.name)
