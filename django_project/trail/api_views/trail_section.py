@@ -1,5 +1,4 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 from ..models.trail_section import TrailSection
 from ..serializers.trail_section import TrailSectionSerializer
@@ -11,13 +10,11 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class TrailSectionListApiView(APIView):
+class TrailSectionListApiView(ListAPIView):
     """
-    Api to list all available trail section data on GET request.
+      Api to list all available trail section data on GET request.
     """
 
-    def get(self, request):
-        trail_section = TrailSection.objects.all().order_by('name')
-
-        serializer = TrailSectionSerializer(trail_section, many=True)
-        return Response(serializer.data)
+    queryset = TrailSection.Category.objects.all()
+    serializer_class = TrailSectionSerializer
+    lookup_field = 'slug'

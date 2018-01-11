@@ -7,7 +7,7 @@ from .api_views.trail import TrailListApiView
 from .api_views.trail_section import TrailSectionListApiView
 from .api_views.trail_sections import TrailSectionsListApiView
 from .api_views.category import CategoryListApiView
-from .api_views.grade import GradeListApiView, GradeUpdateAPIView
+from .api_views.grade import GradeListApiView
 from .api_views.point_of_interest import PointOfInterestListApiView
 
 urlpatterns = [
@@ -32,10 +32,6 @@ urlpatterns = [
         r'^api/list_grade/',
         GradeListApiView.as_view(),
         name='api-get-grade'),
-    url(
-        r'^api/(?P<slug>[\w-]+)/list_grade-update/',
-        GradeUpdateAPIView.as_view(),
-        name='api-get-grade-update'),
     url(
         r'^api/list_poi/',
         PointOfInterestListApiView.as_view(),

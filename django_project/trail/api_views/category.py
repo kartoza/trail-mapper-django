@@ -1,5 +1,4 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 from ..models.category import Category
 from ..serializers.category import CategorySerializer
@@ -11,13 +10,12 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class CategoryListApiView(APIView):
+class CategoryListApiView(ListAPIView):
     """
-    Api to list all available categories on GET request.
+    Api to list all available Categories
+    on GET request.
     """
 
-    def get(self, request):
-        categories = Category.objects.all().order_by('order')
-
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    lookup_field = 'slug'
