@@ -18,7 +18,6 @@ __copyright__ = 'kartoza.com'
 
 
 class TrailSectionListApiView(ListAPIView):
-
     """Api to list all available trail section data on GET request.
     """
 
@@ -54,5 +53,4 @@ class TrailSectionCreateAPIView(CreateAPIView):
     """
     queryset = TrailSection.objects.all()
     serializer_class = TrailSectionSerializer
-
 
