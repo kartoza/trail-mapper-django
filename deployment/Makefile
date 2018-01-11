@@ -1,4 +1,5 @@
-PROJECT_ID := trail-mapper-django
+# Dont use spaces, hyphens or underscores in the project id
+PROJECT_ID := trailmapperdjango
 
 SHELL := /bin/bash
 
