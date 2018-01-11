@@ -16,9 +16,11 @@ from .api_views.trail_sections import TrailSectionsListApiView
 from .api_views.category import CategoryListApiView
 from .api_views.grade import GradeListApiView
 from .api_views.point_of_interest import PointOfInterestListApiView
+from .views.home import index
 
 urlpatterns = [
 
+    url(r'^$', index, name='trails-home'),
     url(
         r'^api/list_trail/',
          TrailListApiView.as_view(),

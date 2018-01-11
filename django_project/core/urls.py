@@ -1,4 +1,4 @@
-# coding=utf-8
+    # coding=utf-8
 """Project level url handler."""
 from __future__ import absolute_import
 
@@ -9,7 +9,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponseServerError
 from django.template import loader, Context
-
+from trail.views import index
 
 admin.autodiscover()
 handler404 = 'base.views.error_views.custom_404'
@@ -41,6 +41,7 @@ urlpatterns += i18n_patterns(
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^trail/', include('trail.urls', namespace='trail')),
+    url(r'^$', index, name='home')
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
