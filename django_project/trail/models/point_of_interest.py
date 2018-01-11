@@ -1,17 +1,12 @@
 # coding=utf-8
 """Model definitions for a trail app"""
-
 import os
 import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.text import slugify
 from django.conf.global_settings import MEDIA_ROOT
 
-from unidecode import unidecode
-
-from core.settings.contrib import STOP_WORDS
 from category import Category
 from trail_section import TrailSection
 
@@ -63,7 +58,12 @@ class POI(models.Model):
         blank=True
     )
 
-    geometry = models.PointField(srid=4326)
+    geometry = models.PointField(
+        geography=True,
+        blank=True,
+        null=True,
+        srid=4326
+    )
 
     objects = models.Manager()
     category = models.ForeignKey(Category)

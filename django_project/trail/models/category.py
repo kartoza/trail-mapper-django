@@ -6,12 +6,8 @@ import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.text import slugify
 from django.conf.global_settings import MEDIA_ROOT
 
-from unidecode import unidecode
-
-from core.settings.contrib import STOP_WORDS
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/10/2018'

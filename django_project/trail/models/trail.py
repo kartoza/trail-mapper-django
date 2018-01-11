@@ -1,18 +1,12 @@
 # coding=utf-8
 """Model definitions for a trail"""
-
 import os
 import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.text import slugify
 from django.conf.global_settings import MEDIA_ROOT
 
-from unidecode import unidecode
-
-from core.settings.contrib import STOP_WORDS
-# from ..utils import GUIDModel
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/09/2018'
@@ -72,7 +66,12 @@ class Trail(models.Model):
         help_text=_('Enter offset value i.e -2')
     )
 
-    geometry = models.PointField(srid=4326)
+    geometry = models.PointField(
+        geography = True,
+        blank = True,
+        null = True,
+        srid=4326
+    )
 
     slug = models.SlugField()
     objects = models.Manager()
