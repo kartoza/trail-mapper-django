@@ -3,6 +3,7 @@ from rest_framework.generics import (
     ListCreateAPIView,
     CreateAPIView
     )
+
 from ..models.trail import Trail
 from ..serializers.trail import TrailSerializer
 
@@ -49,3 +50,4 @@ class TrailCreateAPIView(CreateAPIView):
     """
     queryset = Trail.objects.all()
     serializer_class = TrailSerializer
+
