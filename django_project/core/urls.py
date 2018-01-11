@@ -1,13 +1,15 @@
 # coding=utf-8
 """Project level url handler."""
+from __future__ import absolute_import
+
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
-from django.contrib.auth import views as auth_views  # noqa
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponseServerError
 from django.template import loader, Context
+
 
 admin.autodiscover()
 handler404 = 'base.views.error_views.custom_404'
@@ -36,12 +38,9 @@ urlpatterns = []
 # e.g. /en/reports/
 urlpatterns += i18n_patterns(
     url(r'^site-admin/', include(admin.site.urls)),
-    url(r'^', include('github_issue.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
-    # url(r'^password/reset/done/$', auth_views.password_reset_done,{
-    #     'template_name': 'userena/password_reset_done.html'},
-    #     name='password_reset_done'),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^trail/', include('trail.urls', namespace='trail')),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:

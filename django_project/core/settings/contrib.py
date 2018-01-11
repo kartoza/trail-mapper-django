@@ -13,6 +13,7 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',  # enable Raven plugin
     'widget_tweaks',  # lets us add some bootstrap css to form elements
     'easy_thumbnails',
+    'rest_framework', # used for API
 )
 
 # Set disqus and shortname
@@ -102,3 +103,4 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['user:email', 'public_repo', 'read:org']
     }
 }
+
