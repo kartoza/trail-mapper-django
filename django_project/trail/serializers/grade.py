@@ -18,4 +18,3 @@ class GradeSerializer(serializers.ModelSerializer):
             'name',
             'image'
         ]
-
