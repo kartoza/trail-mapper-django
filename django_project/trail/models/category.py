@@ -6,12 +6,8 @@ import uuid as uuid_lib
 
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.text import slugify
 from django.conf.global_settings import MEDIA_ROOT
 
-from unidecode import unidecode
-
-from core.settings.contrib import STOP_WORDS
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/10/2018'
@@ -20,19 +16,19 @@ __copyright__ = 'kartoza.com'
 
 
 class Category(models.Model):
-    "Model definition of a Trail Section."
+    "Model definition of a Category."
 
     guid = models.UUIDField(
         _('GUID'),
         primary_key=False,
+        null=False,
         default=uuid_lib.uuid4,
-        editable=False)
+        editable=False
+    )
 
     name = models.CharField(
         _('Name of Category'),
         max_length = 255,
-        null=False,
-        blank=False,
         help_text = _('Enter Category name.')
     )
 
@@ -47,18 +43,11 @@ class Category(models.Model):
             '"Choose File" button above.')
     )
 
-    geometry = models.LineStringField(
-        _('Geometry'),
-        null=True,
-        blank=True,
-        help_text = _('Enter the geometry of the tcategory (as line string).')
-    )
-
-
     slug = models.SlugField(
         null = True,
         blank = True
     )
+
     objects = models.Manager()
 
 
@@ -68,8 +57,8 @@ class Category(models.Model):
         verbose_name_plural = 'Trail Categories'
 
 
-        def _str__(self):
-            return self.__unicode__()
+    def _str__(self):
+        return self.__unicode__()
 
-        def __unicode__(self):
-            return '%s' % (self.name)
+    def __unicode__(self):
+        return '%s' % (self.name)
