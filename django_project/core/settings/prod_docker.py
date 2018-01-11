@@ -12,7 +12,7 @@ ALLOWED_HOSTS = ['*']
 ADMINS = (
     ('Tim Sutton', 'tim@kartoza.com'),
     ('Christian Christellis', 'christian@kartoza.com'),
-    ('Anita Hapsari', 'anita@kartoza.com'),)
+    ('Alison ', 'alison@kartoza.com'),)
 
 DATABASES = {
     'default': {
@@ -39,4 +39,4 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'noreply@kartoza.com'
 EMAIL_HOST_PASSWORD = 'docker'
 EMAIL_USE_TLS = False
-EMAIL_SUBJECT_PREFIX = '[PROJECTA]'
+EMAIL_SUBJECT_PREFIX = '[TRAILMAPPER]'

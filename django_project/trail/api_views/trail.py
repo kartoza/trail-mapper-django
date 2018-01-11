@@ -6,7 +6,8 @@ from rest_framework.filters import (
 )
 from rest_framework.generics import (
     ListAPIView,
-    CreateAPIView
+    CreateAPIView,
+    UpdateAPIView
     )
 from ..models.trail import Trail
 from ..serializers.trail import TrailSerializer
@@ -57,3 +58,11 @@ class TrailCreateAPIView(CreateAPIView):
     queryset = Trail.objects.all()
     serializer_class = TrailSerializer
     
+
+class TrailUpdateAPIView(UpdateAPIView):
+    """API to allow client update an existing Trail entry on
+       the server.
+    """
+    queryset = Trail.objects.all()
+    serializer_class = TrailSerializer
+    lookup_field = 'slug'

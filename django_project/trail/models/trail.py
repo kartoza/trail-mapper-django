@@ -66,7 +66,7 @@ class Trail(models.Model):
         help_text=_('Enter offset value i.e -2')
     )
 
-    geometry = models.PointField(
+    geom = models.PointField(
         geography = True,
         blank = True,
         null = True,

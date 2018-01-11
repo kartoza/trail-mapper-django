@@ -19,6 +19,6 @@ class TrailSectionSerializer(serializers.ModelSerializer):
             'grade_id',
             'image',
             'notes',
-            'geometry'
+            'geom'
         ]
     
