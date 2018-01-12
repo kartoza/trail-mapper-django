@@ -5,7 +5,7 @@ from .models.trail_section import TrailSection
 from .models.grade import Grade
 from .models.trail_sections import TrailSections
 from .models.category import Category
-from .models.point_of_interest import POI
+from .models.point_of_interest import PointOfInterest
 
 
 class TrailAdmin(admin.ModelAdmin):
@@ -154,4 +154,4 @@ admin.site.register(TrailSection, TrailSectionAdmin)
 admin.site.register(Grade, GradeAdmin)
 admin.site.register(TrailSections, TrailSectionsAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(POI, POIAdmin)
+admin.site.register(PointOfInterest, POIAdmin)

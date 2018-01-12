@@ -246,18 +246,18 @@ mediasync:
 	@echo "------------------------------------------------------------------"
 	@echo "Syncing media files and secret.py from live server"
 	@echo "------------------------------------------------------------------"
-	@rsync -av --progress changelog.qgis.org:/home/trail-mapper-django/deployment/media/ media
-	@rsync -av --progress changelog.qgis.org:/home/trail-mapper-django/django_project/core/settings/secret.py ../django_project/core/settings/
-	@rsync -av --progress changelog.qgis.org:/home/trail-mapper-django/deployment/btsync-db.env btsync-db.env.PRODUCTION
-	@rsync -av --progress changelog.qgis.org:/home/trail-mapper-django/deployment/btsync-media.env btsync-media.env.PRODUCTION
+	@rsync -av --progress trailmapper.kartoza.com:/home/trail-mapper-django/deployment/media/ media
+	@rsync -av --progress trailmapper.kartoza.com:/home/trail-mapper-django/django_project/core/settings/secret.py ../django_project/core/settings/
+	@rsync -av --progress trailmapper.kartoza.com:/home/trail-mapper-django/deployment/btsync-db.env btsync-db.env.PRODUCTION
+	@rsync -av --progress trailmapper.kartoza.com:/home/trail-mapper-django/deployment/btsync-media.env btsync-media.env.PRODUCTION
 
 dbsync:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Syncing database files from live server"
 	@echo "------------------------------------------------------------------"
-	-@ssh changelog.qgis.org "cd /home/trail-mapper-django/deployment; make dbbackup"
-	@rsync -av --progress changelog.qgis.org:/home/trail-mapper-django/deployment/backups/ backups
+	-@ssh trailmapper.kartoza.com "cd /home/trail-mapper-django/deployment; make dbbackup"
+	@rsync -av --progress trailmapper.kartoza.com:/home/trail-mapper-django/deployment/backups/ backups
 
 create-machine:
 	@echo
