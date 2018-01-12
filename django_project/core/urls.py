@@ -11,7 +11,7 @@ from django.template import loader, Context
 from .views.home import index
 
 admin.autodiscover()
-handler404 = 'base.views.error_views.custom_404'
+handler404 = 'base.viewsets.error_views.custom_404'
 
 
 def handler500(request):

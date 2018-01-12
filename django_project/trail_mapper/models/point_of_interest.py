@@ -17,7 +17,7 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class POI(models.Model):
+class PointOfInterest(models.Model):
     "Model definition for a Point of Interest (POI)."
 
     guid = models.UUIDField(
