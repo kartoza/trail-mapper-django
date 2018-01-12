@@ -2,8 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from ..serializers import TrailSectionsSerializer
-from trail_mapper.models import TrailSections
-
+from trail_mapper.models import TrailSections, Trail
 
 
 class TrailSectionsViewSet(viewsets.ModelViewSet):
@@ -11,3 +10,23 @@ class TrailSectionsViewSet(viewsets.ModelViewSet):
     queryset = TrailSections.objects.all()
     serializer_class = TrailSectionsSerializer
     lookup_field = 'slug'
+
+    def list(self, request, *args, **kwargs):
+        trail_queryset = Trail.objects.all()
+        trails = []
+        for trail in trail_queryset:
+            trail_sections = self.queryset.filter(trail__guid=trail.guid)
+            trail_sections_list = []
+            for trail_section in trail_sections:
+                trail_sections_list.append(trail_section.trail_section.guid)
+            trail_dict = {
+                'trail_guid': trail.guid,
+                'trail_section_guids': trail_sections_list
+            }
+            trails.append(trail_dict)
+
+        content = {
+            "trails_with_sections": trails
+        }
+
+        return Response(content)
