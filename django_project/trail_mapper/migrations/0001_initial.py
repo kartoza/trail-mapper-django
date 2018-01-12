@@ -48,8 +48,8 @@ class Migration(migrations.Migration):
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named POI', max_length=300, null=True, verbose_name='Notes on named POI', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail_mapper section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/poi', null=True, verbose_name='Image file', blank=True)),
                 ('slug', models.SlugField(null=True, blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
-                ('category', models.ForeignKey(to='trail.Category')),
+                ('geom', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
+                ('category', models.ForeignKey(to='trail_mapper.Category')),
             ],
             options={
                 'ordering': ['name'],
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(help_text='An image of the trail_mapper. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_mapper', null=True, verbose_name='Image file', blank=True)),
                 ('colour', models.CharField(help_text='Enter colour hex of the trail_mapper.', max_length=255, null=True, verbose_name='Colour', blank=True)),
                 ('offset', models.IntegerField(default=0, help_text='Enter offset value i.e -2', null=True, verbose_name='Offset', blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
+                ('geom', django.contrib.gis.db.models.fields.PointField(srid=4326, null=True, geography=True, blank=True)),
                 ('slug', models.SlugField()),
             ],
         ),
@@ -78,11 +78,11 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(help_text='Enter name of the Trail.', max_length=255, verbose_name='Name of trail_mapper section')),
                 ('notes', models.TextField(help_text='Enter some notes regarding the above named trail_mapper', max_length=300, null=True, verbose_name='Notes on named Trail', blank=True)),
                 ('image', models.ImageField(help_text='An image of the trail_mapper section. Most browsers support dragging the image directly on to the "Choose File" button above.', upload_to=b'images/trail_sections', null=True, verbose_name='Image file', blank=True)),
-                ('geometry', django.contrib.gis.db.models.fields.PointField(srid=4326)),
+                ('geom', django.contrib.gis.db.models.fields.PointField(srid=4326)),
                 ('slug', models.SlugField(null=True, blank=True)),
                 ('time_start', models.DateTimeField(help_text='Enter time when the trail_mapper started on that section.', null=True, verbose_name='Start Time', blank=True)),
                 ('time_end', models.DateTimeField(help_text='Enter time when the trail_mapper ended on that section.', null=True, verbose_name='End Time', blank=True)),
-                ('grade_id', models.ForeignKey(to='trail.Grade')),
+                ('grade_id', models.ForeignKey(to='trail_mapper.Grade')),
             ],
             options={
                 'verbose_name_plural': 'Trail Section',
@@ -94,8 +94,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('order', models.CharField(help_text='Enter ordering of trail_mapper sections.', max_length=255, verbose_name='Order')),
                 ('slug', models.SlugField(null=True, blank=True)),
-                ('trail_mapper', models.ForeignKey(to='trail.Trail')),
-                ('trail_section', models.ForeignKey(to='trail.TrailSection')),
+                ('trail', models.ForeignKey(to='trail_mapper.Trail')),
+                ('trail_section', models.ForeignKey(to='trail_mapper.TrailSection')),
             ],
             options={
                 'ordering': ['order'],
@@ -105,6 +105,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='poi',
             name='trail_section',
-            field=models.ForeignKey(to='trail.TrailSection'),
+            field=models.ForeignKey(to='trail_mapper.TrailSection'),
         ),
     ]
