@@ -67,9 +67,10 @@ class Trail(models.Model):
     )
 
     geom = models.PointField(
-        geography = True,
-        blank = True,
-        null = True,
+        dim=3,
+        geography=True,
+        blank=True,
+        null=True,
         srid=4326
     )
 
