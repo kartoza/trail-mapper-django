@@ -16,7 +16,7 @@ class TrailSectionSerializer(serializers.ModelSerializer):
         fields = [
             'guid',
             'name',
-            'grade_id',
+            'grade',
             'image',
             'notes',
             'geom'

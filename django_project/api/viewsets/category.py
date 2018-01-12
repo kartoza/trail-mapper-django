@@ -1,3 +1,4 @@
+import os
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -18,6 +19,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
         for item in self.queryset:
             if item.image:
                 image = item.image
+                if not os.path.exists(image.path):
+                    image = ''
             else:
                 image = ''
             object_dict = {

@@ -1,3 +1,4 @@
+import os
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -9,3 +10,25 @@ class GradeViewSet(viewsets.ModelViewSet):
     queryset = Grade.objects.all()
     serializer_class = GradeSerializer
     lookup_field = 'slug'
+
+    def list(self, request, *args, **kwargs):
+        items = []
+        for item in self.queryset:
+            if item.image:
+                image = item.image
+                if not os.path.exists(image.path):
+                    image = ''
+            else:
+                image = ''
+            object_dict = {
+                'guid': item.guid,
+                'name': item.name,
+                'image': image
+            }
+            items.append(object_dict)
+
+        content = {
+            "grades": items
+        }
+
+        return Response(content)

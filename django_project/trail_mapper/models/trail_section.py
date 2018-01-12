@@ -62,7 +62,7 @@ class TrailSection(models.Model):
         blank=True
     )
     objects = models.Manager()
-    grade_id = models.ForeignKey(Grade)
+    grade = models.ForeignKey(Grade)
 
     time_start = models.DateTimeField(
         _("Start Time"),
