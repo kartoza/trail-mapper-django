@@ -7,7 +7,7 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class POISerializer(serializers.ModelSerializer):
+class PointOfInterestSerialiser(serializers.ModelSerializer):
     """Serializer class for a Point of Interest model."""
 
     class Meta:
