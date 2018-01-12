@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from trail_mapper.models.trail import Trail
+from ..models.trail import Trail
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/10/2018'
