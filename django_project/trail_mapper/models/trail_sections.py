@@ -39,7 +39,6 @@ class TrailSections(models.Model):
         app_label = 'trail_mapper'
         verbose_name_plural = 'Trail Sections'
 
-
     def _str__(self):
         return self.__unicode__()
 

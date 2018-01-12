@@ -14,9 +14,8 @@ class TrailSectionsSerializer(serializers.ModelSerializer):
         model = TrailSections
         url_field_name = 'image'
         fields = [
-            'trail_mapper',
-            'trail_mapper',
-            'section',
+            'trail',
+            'trail_section',
             'order'
         ]
 
