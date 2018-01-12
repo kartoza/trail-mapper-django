@@ -14,6 +14,7 @@ INSTALLED_APPS += (
     'widget_tweaks',  # lets us add some bootstrap css to form elements
     'easy_thumbnails',
     'rest_framework', # used for API
+    'rest_framework_swagger', # used for the ui
 )
 
 REST_FRAMEWORK = {
