@@ -2,7 +2,7 @@
 """
 core.settings.base
 """
-# Django settings for trail project.
+# Django settings for trail_mapper project.
 
 from .utils import absolute_path
 

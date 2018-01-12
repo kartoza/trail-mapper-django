@@ -10,15 +10,21 @@ INSTALLED_APPS = (
 ) + INSTALLED_APPS
 
 INSTALLED_APPS += (
-    'raven.contrib.django.raven_compat',  # enable Raven plugin
+    #'raven.contrib.django.raven_compat',  # enable Raven plugin
     'widget_tweaks',  # lets us add some bootstrap css to form elements
     'easy_thumbnails',
     'rest_framework', # used for API
 )
 
-# Set disqus and shortname
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 # noinspection PyUnresolvedReferences
-from .secret import DISQUS_WEBSITE_SHORTNAME  # noqa
 
 MIGRATION_MODULES = {'accounts': 'core.migration'}
 
@@ -46,11 +52,6 @@ THUMBNAIL_ALIASES = {
 
 INSTALLED_APPS += (
     'pipeline',)
-
-MIDDLEWARE_CLASSES += (
-    # For rosetta localisation
-    'django.middleware.locale.LocaleMiddleware',
-)
 
 DEFAULT_FILE_STORAGE = (
     'django_hashedfilenamestorage.storage.HashedFilenameFileSystemStorage')

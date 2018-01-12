@@ -2,14 +2,13 @@
 """Project level url handler."""
 from __future__ import absolute_import
 
-from django.conf.urls import patterns, include, url
-from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponseServerError
 from django.template import loader, Context
-from trail.views import index
+from .views.home import index
 
 admin.autodiscover()
 handler404 = 'base.views.error_views.custom_404'
@@ -33,22 +32,14 @@ def handler500(request):
     })))
 
 
-urlpatterns = []
-# These patterns work if there is a locale code injected in front of them
-# e.g. /en/reports/
-urlpatterns += i18n_patterns(
+urlpatterns = [
+    url(r'^$', index, name='home'),
     url(r'^site-admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^trail/', include('trail.urls', namespace='trail')),
-    url(r'^$', index, name='home')
-)
-
-if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns += patterns(
-        '',
-        url(r'^rosetta/', include('rosetta.urls')),
-    )
+    url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^trails/', include('trail_mapper.urls', namespace='trail_mapper')),
+]
 
 if settings.DEBUG:
     urlpatterns += static(
