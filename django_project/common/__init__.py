@@ -1,6 +1,0 @@
-__author__ = 'Alison Mukoma'
-__project_name = 'TrailMapper'
-__filename = '__init__.py'
-__date__ = '01/11/18'
-__copyright__ = 'alison@kartoza.com'
-__doc__ = ''

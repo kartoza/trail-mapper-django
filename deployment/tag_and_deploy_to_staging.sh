@@ -23,10 +23,10 @@ then
     rsync -r -v media/ staging.trailmapper.kartoza.com:/home/trail-mapper-django/deployment/media
     # Tag the release and push to main repo
 	git tag $VERSION
-	git push --tags upstream 
+	git push --tags upstream
     # Check it out on the server
     # No migrations are run - you should do that manually for now
-	ssh staging.trailmapper.kartoza.com "cd /home/trail-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
+	ssh staging.trailmapper.kartoza.com "cd /home/trail_mapper-mapper-django/deployment && git fetch --tags && git checkout $VERSION && make collectstatic && make reload"
 else
 	echo "Tag and deploy to staging aborted."
 fi
