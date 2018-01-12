@@ -9,7 +9,7 @@
 
 smtp:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-smtp
+  container_name: trail-smtp
   image: catatnight/postfix
   hostname: postfix
   environment:
@@ -20,7 +20,7 @@ smtp:
 
 db:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-db
+  container_name: trail-db
   image: kartoza/postgis:9.4-2.1
   volumes:
     #- ./pg/postgres_data:/var/lib/postgresql
@@ -32,7 +32,7 @@ db:
 
 uwsgi:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-uwsgi
+  container_name: trail-uwsgi
   build: docker
   hostname: uwsgi
   environment:
@@ -41,7 +41,7 @@ uwsgi:
     - DATABASE_PASSWORD=docker
     - DATABASE_HOST=db
     - DJANGO_SETTINGS_MODULE=core.settings.prod_docker
-    - VIRTUAL_HOST=trail_mapper.kartoza.com
+    - VIRTUAL_HOST=trail.kartoza.com
     - VIRTUAL_PORT=8080
   volumes:
     - ../django_project:/home/web/django_project
@@ -57,7 +57,7 @@ uwsgi:
 
 dbbackups:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-db-backups
+  container_name: trail-db-backups
   image: kartoza/pg-backup:9.4
   hostname: pg-backups
   volumes:
@@ -67,7 +67,7 @@ dbbackups:
   environment:
     # take care to let the project name below match that
     # declared in the top of the makefile
-    - DUMPPREFIX=trail_mapper
+    - DUMPPREFIX=trail
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to ever use different credentials
     - PGUSER=docker
@@ -80,7 +80,7 @@ dbbackups:
 # This is normally the main entry point for a production server
 web:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-web
+  container_name: trail-web
   image: nginx
   hostname: nginx
   volumes:
@@ -101,7 +101,7 @@ web:
 # from produ environment if wanted
 devweb:
   # Note you cannot scale if you use conteiner_name
-  container_name: trail_mapper-dev-web
+  container_name: trail-dev-web
   build: docker
   dockerfile: Dockerfile-dev
   hostname: uwsgi
@@ -112,7 +112,7 @@ devweb:
     - DATABASE_HOST=db
     - DJANGO_SETTINGS_MODULE=core.settings.prod_docker
     - PYTHONPATH=/home/web/django_project
-    - VIRTUAL_HOST=trail_mapper.kartoza.com
+    - VIRTUAL_HOST=trail.kartoza.com
     - VIRTUAL_PORT=8080
   volumes:
     - ../django_project:/home/web/django_project
@@ -129,7 +129,7 @@ devweb:
     # for ssh
     - "60203:22"
 
-btsync-db:
+btsync-db:                                                                                                                                   
   # BTSync backups for database dumps
   image: kartoza/btsync
   volumes:
@@ -146,7 +146,7 @@ btsync-db:
     # our database backups etc.
     - btsync-db.env
 
-btsync-media:
+btsync-media:                                                                                                                                   
   # BTSync backups for django media
   image: kartoza/btsync
   volumes:

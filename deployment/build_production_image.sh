@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Use this to build a production image of the trail_mapper-mapper-django-uwsgi"
+echo "Use this to build a production image of the trail-mapper-django-uwsgi"
 echo "docker, push the image upstream with tag :latest and "
 echo "a versioned tag e.g. :1.6.19."
 echo "Useage:"
@@ -21,11 +21,11 @@ then
     cd ..
 	git archive --format=tar.gz $VERSION django_project > deployment/docker/trail-mapper-django.tar.gz
     cd -
-    # Copy all but the last line of the Dockerfile so that our
+    # Copy all but the last line of the Dockerfile so that our 
     # production image is always based off that
     cat docker/Dockerfile | sed \$d > docker/Dockerfile-prod
     # Add will extract the archive...
-    echo "ADD trail_mapper-mapper-django.tar.gz /home/web" >> docker/Dockerfile-prod
+    echo "ADD trail-mapper-django.tar.gz /home/web" >> docker/Dockerfile-prod
     echo "CMD [\"uwsgi\", \"--ini\", \"/uwsgi.conf\"]" >> docker/Dockerfile-prod
     # Now build the image and tag it
     cd docker
