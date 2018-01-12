@@ -54,8 +54,8 @@ class TrailSection(models.Model):
             '"Choose File" button above.')
     )
 
-    geom = models.PointField(srid=4326)
-
+    # 3 dimensions to support z
+    geom = models.LineStringField(srid=4326, dim=3, geography=True)
 
     slug = models.SlugField(
         null=True,

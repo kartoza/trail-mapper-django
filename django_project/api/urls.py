@@ -16,7 +16,7 @@ router = routers.DefaultRouter()
 router.register(r'category', CategoryViewSet)
 router.register(r'grade', GradeViewSet)
 router.register(r'pointofinterest', PointOfInterestViewSet)
-router.register(r'trail_mapper', TrailViewSet)
+router.register(r'trail', TrailViewSet)
 router.register(r'trail_section', TrailSectionViewSet)
 router.register(r'trail_sections', TrailSectionsViewSet)
 
