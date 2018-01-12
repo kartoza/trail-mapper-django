@@ -1,0 +1,6 @@
+from category import CategoryViewSet
+from grade import GradeViewSet
+from point_of_interest import PointOfInterestViewSet
+from trail import TrailViewSet
+from trail_section import TrailSectionViewSet
+from trail_sections import TrailSectionsViewSet
