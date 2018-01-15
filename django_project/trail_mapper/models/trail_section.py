@@ -19,7 +19,7 @@ __copyright__ = 'kartoza.com'
 
 
 class TrailSection(models.Model):
-    "Model definition of a Trail Section."
+    """Model definition of a Trail Section."""
 
     guid = models.UUIDField(
         _('GUID'),
@@ -89,4 +89,4 @@ class TrailSection(models.Model):
         return self.__unicode__()
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        return '%s' % self.name
