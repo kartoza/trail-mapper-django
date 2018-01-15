@@ -19,5 +19,7 @@ pytz
 django-allauth==0.25.2
 # support special characters
 Unidecode==0.4.20
-# Django rest framework support
+# django rest framework support
 djangorestframework==3.5.3
+# django-rest-swagger ui
+django-rest-swagger==2.1.2

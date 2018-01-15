@@ -8,7 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponseServerError
 from django.template import loader, Context
-from .views.home import index
+from rest_framework_swagger.views import get_swagger_view
 
 admin.autodiscover()
 handler404 = 'base.viewsets.error_views.custom_404'
@@ -32,8 +32,11 @@ def handler500(request):
     })))
 
 
+schema_view = get_swagger_view(title='TrailMapper API')
+
+
 urlpatterns = [
-    url(r'^$', index, name='home'),
+    url(r'^$', schema_view),
     url(r'^site-admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^accounts/', include('allauth.urls')),

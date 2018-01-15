@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from trail_mapper.models.trail_section import TrailSection
+from ..models.trail import Trail
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/10/2018'
@@ -7,18 +7,19 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class TrailSectionSerializer(serializers.ModelSerializer):
-    """Serializer class for a trail_mapper section model."""
+class TrailSerializer(serializers.ModelSerializer):
+    """Serializer class for Trail model."""
 
     class Meta:
-        model = TrailSection
+        model = Trail
         url_field_name = 'image'
         fields = [
             'guid',
             'name',
-            'grade',
             'image',
             'notes',
-            'geom'
+            'colour',
+            'geom',
+            'offset',
         ]
 
