@@ -15,8 +15,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     lookup_field = 'guid'
 
     def list(self, request, *args, **kwargs):
+        # Recreate the queryset here so it fetches all data
+        queryset = Category.objects.all()
         items = []
-        for item in self.queryset:
+        for item in queryset:
             if item.image:
                 image = item.image
                 if not os.path.exists(image.path):

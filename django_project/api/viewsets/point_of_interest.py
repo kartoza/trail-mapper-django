@@ -9,11 +9,13 @@ from trail_mapper.models import PointOfInterest
 class PointOfInterestViewSet(viewsets.ModelViewSet):
     queryset = PointOfInterest.objects.all()
     serializer_class = PointOfInterestSerialiser
-    lookup_field = 'slug'
+    lookup_field = 'guid'
 
     def list(self, request, *args, **kwargs):
+        # recreate the queryset here so we can be sure it fetches all data
+        queryset = PointOfInterest.objects.all()
         items = []
-        for item in self.queryset:
+        for item in queryset:
             if item.image:
                 image = item.image
                 if not os.path.exists(image.path):

@@ -7,13 +7,16 @@ from trail_mapper.models import Trail
 
 
 class TrailViewSet(viewsets.ModelViewSet):
+    # recreate the queryset her so we can be sure it fetches all data
     queryset = Trail.objects.all()
     serializer_class = TrailSerializer
-    lookup_field = 'slug'
+    lookup_field = 'guid'
 
     def list(self, request, *args, **kwargs):
+        # recreate the queryset her so we can be sure it fetches all data
+        trail_queryset = Trail.objects.all()
         items = []
-        for item in self.queryset:
+        for item in trail_queryset:
             if item.image:
                 image = item.image
                 if not os.path.exists(image.path):

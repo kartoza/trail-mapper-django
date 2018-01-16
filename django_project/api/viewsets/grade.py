@@ -12,8 +12,10 @@ class GradeViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def list(self, request, *args, **kwargs):
+        # recreate the queryset here so it gets all data
+        queryset = Grade.objects.all()
         items = []
-        for item in self.queryset:
+        for item in queryset:
             if item.image:
                 image = item.image
                 if not os.path.exists(image.path):
