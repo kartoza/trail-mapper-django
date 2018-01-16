@@ -1,14 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Trail Mapper Home</title>
-</head>
-<body>
-<h1>Welcome to the Trail Mapper.</h1>
-<ul>
-    <li><a href='/api/'>API</a></li>
-    <li><a href='/trails/'>Trails</a></li>
-</ul>
-</body>
+{% load compressed %}
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<!--
+	Hielo by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Trail Mapper by Kartoza Pty (Ltd.)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% compressed_css 'contrib' %}
+        {% compressed_css 'project' %}
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"><a href="index.html">Trail Mapper <span>by Kartoza Pty (Ltd.)</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="generic.html">Generic</a></li>
+					<li><a href="elements.html">Elements</a></li>
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section class="banner full">
+                <!-- Copy and paste more article elements for a slide show -->
+				<article>
+					<img src="{% static 'img/slide-01.jpg' %}" alt="" />
+					<div class="inner">
+						<header>
+							<p>A free hiking trail mapping site by <a href="http://kartoza.com">Kartoza</a></p>
+							<h2>Trail Mapper</h2>
+						</header>
+					</div>
+				</article>
+			</section>
+			<section class="banner full">
+                <!-- Copy and paste more article elements for a slide show -->
+				<article>
+					<img src="{% static 'img/slide-02.jpg' %}" alt="" />
+					<div class="inner">
+						<header>
+							<p>Making natural areas accessible.</p>
+							<h2>Trail Mapper</h2>
+						</header>
+					</div>
+				</article>
+			</section>
+		<!-- One -->
+			<section id="one" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="{% static 'img/map.png' %}" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>All trails are browsable via our online maps.</p>
+										<h2>Online Maps</h2>
+									</header>
+									<p>
+                                        Capture your favourite trails and take photos along those
+                                        trails using your phone. Your GPS tracks, photos and
+                                        notes get synchronised to this web site and will
+                                        appear automatically on our web site.
+                                    </p>
+									<p>
+                                        You can also create new trail entries here on the web site
+                                        using simple forms to digitise trails and points of interest.
+                                        The data then appears immediately on the map.
+                                    </p>
+									<footer class="align-center">
+										<a href="#" class="button alt">View map</a>
+									</footer>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="{% static 'img/api.png' %}" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>All trails published via open (OGC) web services.</p>
+										<h2>Open Data, Open API</h2>
+									</header>
+									<p>The data you capture on this site is <strong>your</strong> data -
+                                        we provide it in a way that is easy to embed into your own websites or
+                                        desktop projects.</p>
+                                    <p>
+                                        If you are an app or web developer, we also provide the data
+                                        via an open API. This site includes an API browser that
+                                        lets you quickly browse the API.
+                                    </p>
+									<footer class="align-center">
+										<a href="/api" class="button alt">Browse API</a>
+									</footer>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style3">
+				<div class="inner">
+					<header class="align-center">
+						<p>
+                            Our mission is to make the sharing and collection of
+                            hiking trail data fun and easy. We also want to
+                            be an excellent resource for reserve managers and
+                            land owners to use the data when maintaining the
+                            natural areas in their custody.
+                        </p>
+						<h2>Our Mission</h2>
+					</header>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style2">
+				<div class="inner">
+					<header class="align-center">
+						<p class="special">
+                            We are building applications that use and create
+                            the data on http://trailmapper.kartoza.com. Coming soon!
+                        </p>
+						<h2>Apps</h2>
+					</header>
+					<div class="gallery">
+						<div>
+							<div class="image fit">
+								<a href="#"><img src="{% static 'img/ios.png' %}" alt="" /></a>
+							</div>
+						</div>
+						<div>
+							<div class="image fit">
+								<a href="#"><img src="{% static 'img/qgis.png' %}" alt="" /></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="https://twitter.com/KartozaGeo" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com/kartozaGIS/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/explore/tags/kartoza/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="mailto: info@kartoza.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					&copy; Untitled. All rights reserved.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+            {% compressed_js 'contrib' %}
+            {% compressed_js 'project' %}
+	</body>
 </html>

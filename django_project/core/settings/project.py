@@ -31,9 +31,7 @@ SOUTH_TESTS_MIGRATE = False
 # For third party libs like jquery should go in contrib.py
 PIPELINE_JS['project'] = {
     'source_filenames': (
-        'js/csrf-ajax.js',
         'js/trailmapper.js',
-        'js/form.js',
     ),
     'output_filename': 'js/project.js',
 }
@@ -43,8 +41,6 @@ PIPELINE_JS['project'] = {
 PIPELINE_CSS['project'] = {
     'source_filenames': (
         'css/trailmapper.css',
-        'css/form.css',
-        'css/fonts.css'
     ),
     'output_filename': 'css/project.css',
     'extra_context': {

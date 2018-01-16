@@ -14,6 +14,7 @@ INSTALLED_APPS += (
     'widget_tweaks',  # lets us add some bootstrap css to form elements
     'easy_thumbnails',
     'rest_framework', # used for API
+    'rest_framework_gis', # geojson support on API
 )
 
 REST_FRAMEWORK = {
@@ -68,6 +69,13 @@ PIPELINE_JS = {}
 PIPELINE_JS['contrib'] = {
     'source_filenames': (
         'js/gifffer.js',
+        'js/jquery.min.js',
+        'chosen/chosen.js',
+        'js/skel.min.js',
+        'js/main.js',
+        'js/util.js',
+        'js/csrf-ajax.js',
+        'js/form.js',
     ),
     'output_filename': 'js/contrib.js',
 }
@@ -75,7 +83,19 @@ PIPELINE_JS['contrib'] = {
 # Contributed / third party css for pipeline compression
 # For hand rolled css for this app, use project.py
 PIPELINE_CSS = {}
-
+PIPELINE_CSS['contrib'] = {
+    'source_filenames': (
+        'chosen/chosen.min.css',
+        'css/form.css',
+        'css/fonts.css',
+        'css/font-awesome.min.css',
+        'css/main.css'
+    ),
+    'output_filename': 'css/contrib.css',
+    'extra_context': {
+        'media': 'screen, projection',
+    },
+}
 # These get enabled in prod.py
 PIPELINE_ENABLED = False
 PIPELINE_CSS_COMPRESSOR = None
