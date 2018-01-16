@@ -1,6 +1,10 @@
 from category import CategoryViewSet
 from grade import GradeViewSet
 from point_of_interest import PointOfInterestViewSet
+from point_of_interest_geojson import PointOfInterestGeoJSONViewSet
 from trail import TrailViewSet
 from trail_section import TrailSectionViewSet
+from trail_section_geojson import TrailSectionGeoJSONViewSet
 from trail_sections import TrailSectionsViewSet
+
+

@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from trail_mapper.models.trail_section import TrailSection
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
@@ -7,8 +7,8 @@ __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class TrailSectionSerializer(serializers.ModelSerializer):
-    """Serializer class for a trail_mapper section model."""
+class TrailSectionGeoJSONSerializer(GeoFeatureModelSerializer):
+    """Serializer class for a trail_mapper section model as GeoJSON."""
 
     class Meta:
         model = TrailSection
@@ -21,4 +21,5 @@ class TrailSectionSerializer(serializers.ModelSerializer):
             'notes',
             'geom'
         ]
+        geo_field = 'geom'
 

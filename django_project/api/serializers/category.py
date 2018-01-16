@@ -12,6 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
+        url_field_name='guid'
         fields = [
             'guid',
             'name'

@@ -12,7 +12,7 @@ class GradeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Grade
-        url_field_name = 'image'
+        url_field_name = 'guid'
         fields = [
             'guid',
             'name',

@@ -9,11 +9,13 @@ from trail_mapper.models import TrailSection
 class TrailSectionViewSet(viewsets.ModelViewSet):
     queryset = TrailSection.objects.all()
     serializer_class = TrailSectionSerializer
-    lookup_field = 'slug'
+    lookup_field = 'guid'
 
     def list(self, request, *args, **kwargs):
+        # recreate the queryset here so we can be sure it fetches all data
+        section_queryset = TrailSection.objects.all()
         items = []
-        for item in self.queryset:
+        for item in section_queryset.queryset:
             if item.image:
                 image = item.image
                 if not os.path.exists(image.path):

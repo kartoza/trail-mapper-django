@@ -1,7 +1,10 @@
-from category import *
-from grade import *
-from point_of_interest import *
-from trail import *
-from trail_section import *
-from trail_sections import *
+from category import CategorySerializer
+from grade import GradeSerializer
+from point_of_interest import PointOfInterestSerialiser
+from point_of_interest_geojson import PointOfInterestGeoJSONSerialiser
+from trail import TrailSerializer
+from trail_section import TrailSectionSerializer
+from trail_sections import TrailSectionsSerializer
+from trail_section_geojson import TrailSectionGeoJSONSerializer
+
 

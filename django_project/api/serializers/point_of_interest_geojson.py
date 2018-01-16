@@ -1,14 +1,14 @@
-from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from trail_mapper.models.point_of_interest import PointOfInterest
 
-__author__ = 'Alison Mukoma <alison@kartoza.com>'
+__author__ = 'Tim Sutton <tim@kartoza.com>'
 __date__ = '01/10/2018'
 __license__ = "GPL"
 __copyright__ = 'kartoza.com'
 
 
-class PointOfInterestSerialiser(serializers.ModelSerializer):
-    """Serializer class for a Point of Interest model."""
+class PointOfInterestGeoJSONSerialiser(GeoFeatureModelSerializer):
+    """Serializer class for a Point of Interest model - GeoJSON version."""
 
     class Meta:
         model = PointOfInterest
@@ -22,4 +22,5 @@ class PointOfInterestSerialiser(serializers.ModelSerializer):
             'trail_section',
             'category'
         ]
+        geo_field = 'geom'
 
