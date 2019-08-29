@@ -79,7 +79,7 @@ class Trail(models.Model):
 
 
     def _str__(self):
-        return self.__unicode__()
+        return self.__unicode__
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        return '%s' % self.name

@@ -18,7 +18,7 @@ __copyright__ = 'kartoza.com'
 
 
 class PointOfInterest(models.Model):
-    "Model definition for a Point of Interest (POI)."
+    """Model definition for a Point of Interest (POI)."""
 
     guid = models.UUIDField(
         _('GUID'),
@@ -79,4 +79,4 @@ class PointOfInterest(models.Model):
         return self.__unicode__()
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        return '%s' % self.name

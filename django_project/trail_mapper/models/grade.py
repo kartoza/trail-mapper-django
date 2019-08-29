@@ -16,7 +16,7 @@ __copyright__ = 'kartoza.com'
 
 
 class Grade(models.Model):
-    "Model definition of a Grade."
+    """Model definition of a Grade."""
 
     guid = models.UUIDField(
         _('GUID'),
@@ -58,4 +58,4 @@ class Grade(models.Model):
         return self.__unicode__()
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        return '%s' % self.name

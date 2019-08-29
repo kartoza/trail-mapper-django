@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from trail_mapper.models.category import Category
+from ..models.category import Category
 
 __author__ = 'Alison Mukoma <alison@kartoza.com>'
 __date__ = '01/10/2018'
@@ -12,9 +12,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        url_field_name='guid'
         fields = [
             'guid',
             'name'
             ]
-
+  
